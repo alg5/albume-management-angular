@@ -1,0 +1,39 @@
+<div  *ngIf="paperDetailsError == 0"  [class.row]="shape==ShapePaperDetals.Row"  [class.cube]="shape==ShapePaperDetals.Cube" class="flex-container"> 
+    <div *ngIf="paperDetailsError == 0"  class="flex-container">
+        <div class="flex-item">
+            <div class="name">
+             {{translations.PaperName }}
+            </div>
+            <div class="value">
+              {{paperDetails?.PaperName}}
+            </div>
+        </div> 
+
+        <div class="flex-item">
+            <div class="name">
+              {{translations.DateIssue }}
+             </div>
+             <div class="value">
+               {{paperDetails?.DateIssue| date:'shortDate'}}
+             </div>
+          </div> 
+          <div class="flex-item">
+            <div class="name">
+              {{translations.RateBuy }}
+             </div>
+             <div class="value">
+               {{paperDetails?.RateBuy| number:'1.2-2'}}
+             </div>
+          </div> 
+          <div class="flex-item">
+            <div class="name">
+              {{translations.RateSell }}
+             </div>
+             <div class="value">
+               {{paperDetails?.RateSell| number:'1.2-2'}}
+             </div>
+          </div>          
+
+    </div> <!-- class="flex-item" -->
+    <div *ngIf="paperDetailsError == -1" class="no-data">{{translations.NoDataMessage}}</div>
+</div>

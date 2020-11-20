@@ -1,0 +1,26 @@
+<div class="container">
+    <!-- <app-menu-corner></app-menu-corner> -->
+    <h2> שלום, {{translations.CustomerName}} <span class="header-row">{{lastDate}} | {{lastTime}}&nbsp;:{{translations.LastVisit}}</span></h2>
+    <form [formGroup]="rForm" >
+        <div class="form-container tbl-container">
+            <h1 class='login-caption'>כניסה</h1>
+            <div class="login-row">
+                <input class="login-input"  matInput type="text" placeholder="שם משתמש" #usernameobj appAutofocus formControlName="username" 
+                maxlength="100"[(ngModel)]="username" >
+                <div class="alert" *ngIf="!rForm.controls['username'].valid && rForm.controls['username'].touched">{{ translations.UsernameAlert }}</div>
+                
+            </div>
+            <div class="login-row">
+                <input class="login-input"  matInput type="password" placeholder="סיסמה"  formControlName="password"
+                maxlength="100" 
+                [(ngModel)]="password"  >
+                <div class="alert"  *ngIf="!rForm.controls['password'].valid && rForm.controls['password'].touched">{{ translations.PasswordAlert }}</div>
+            </div>
+            <div class="login-row"><button (click)="sendLogin()" [disabled]="!rForm.valid">התחברות</button></div>
+        </div>
+    </form> 
+
+    
+    <div class="no-data" *ngIf="errorCode < 0">{{translations.ErrorMessage}}</div>
+
+</div>

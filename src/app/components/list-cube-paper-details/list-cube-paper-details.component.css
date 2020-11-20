@@ -1,0 +1,28 @@
+.cube-wrap
+{
+    text-align: center;
+}
+.cube{
+    width: 80px;
+    height: 60px;
+    background-color: #2dd5c4;
+    cursor: pointer;
+    text-align: center;
+    vertical-align: middle;
+    padding-top: 20px;
+    margin-left: 5px;
+}
+.paper-details-block{
+    
+    display:flex;
+    padding: 5px 25px;
+    direction: rtl;
+    align-content: center;
+    justify-content: flex-start;
+}
+.paper-details{
+    overflow: hidden;
+    display: flex;
+    background-color:cornsilk;
+    /* border: 5px solid greenyellow; */
+  }

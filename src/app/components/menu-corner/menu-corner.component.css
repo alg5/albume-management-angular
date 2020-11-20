@@ -1,0 +1,18 @@
+.menu-corner
+{
+    text-align: right;
+    
+    border: 1px solid red;
+}
+.triangle{
+	width: 0;
+    height: 0;
+    /* border-top: 65px solid #2dd5c4;
+    border-left: 65px solid transpare   */
+	border-width: 0 65px 65px 0;
+	border-color: transparent #2dd5c4 transparent transparent;
+	border-style: solid;
+}
+
+/* border-top: 100px solid red;
+border-left: 100px solid transpare */

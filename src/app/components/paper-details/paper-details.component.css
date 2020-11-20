@@ -1,0 +1,58 @@
+.row .flex-container {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-direction: normal;
+    -moz-box-direction: normal;
+    -webkit-box-orient: horizontal;
+    -moz-box-orient: horizontal;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-flex-wrap: nowrap;
+    -ms-flex-wrap: nowrap;
+    flex-wrap: nowrap;
+    -webkit-box-pack: start;
+    -moz-box-pack: start;
+    -webkit-justify-content: flex-start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+    -webkit-align-content: stretch;
+    -ms-flex-line-pack: stretch;
+    align-content: stretch;
+    -webkit-box-align: start;
+    -moz-box-align: start;
+    -webkit-align-items: flex-start;
+    -ms-flex-align: start;
+    align-items: flex-start;
+    height: 55px;
+    padding: 5px;
+
+    }
+    .row .flex-item{
+      margin-right: 14px;
+      min-width:110px;
+ 
+    }
+    .cube .flex-container {
+        /* border: 1px solid red; */
+    }
+    .cube .flex-item {
+        /* border: 1px solid greenyellow; */
+    }
+
+    .no-data{
+        color: Red;
+        font-size:16px;
+    }
+    .flex-item .name{
+        font-size: 15px;
+        line-height: normal;
+        opacity: 0.8;
+      }
+      .flex-item .value{
+        font-size: 20px;
+        line-height: normal;
+      }

@@ -1,0 +1,146 @@
+<div class="container sequrities">
+  <app-menu-corner></app-menu-corner>
+    <h2> שלום, {{translations.CustomerName}} <span class="header-row">{{lastDate}} | {{lastTime}}&nbsp;:{{translations.LastVisit}}</span></h2>
+    <!-- <div>
+        <app-live-search></app-live-search>
+    </div> -->
+    <!-- Search form -->
+    <div class=" search-block1">
+    <mat-form-field class=" search-block" >
+      <mat-icon matPrefix>search</mat-icon>
+      <input onlyHebrew matInput type="search" placeholder="חפש כאן" class="search-input"
+      (keyup)="onSearch($event)"  maxlength="100" 
+      [(ngModel)]="mySearch" 
+      >
+      <ul *ngIf="paperSearches?.length > 0" ><li *ngFor="let p of paperSearches" (click)="choosed(p.PaperId, p.PaperName)">{{p.PaperName}} </li></ul>
+      <!-- <div *ngIf="paperSearches?.length > 0">
+        <mat-option  role="list" #srch>
+          <mat-list-item  *ngFor="let p of paperSearches" (click)="choosed(p.PaperId)"> {{p.PaperName}} </mat-list-item>
+        </mat-option >
+      </div> -->
+      <label *ngIf="isExists" class="info"> {{translations.PaperExistsInTable}}</label>
+    
+
+    </mat-form-field>
+    </div>
+    <!-- <form class="form-inline search-block">
+     
+      <input onlyHebrew class="form-control mr-sm-2" type="search" placeholder="{{translations.PlaceHolderSearch}}" aria-label="Search"
+      (keyup)="onSearch($event)"  maxlength="100" 
+      [(ngModel)]="mySearch" >
+    </form> -->
+  
+
+    <div class="tbl-container">
+        <div class="row">סינון בצד השרת</div> 
+        
+        <div class="row">
+          <mat-form-field appearance="fill" class='cbo-filter'>
+            <mat-label>תאריך מ-</mat-label>
+            <input matInput [matDatepicker]="picker1" [formControl]="dateFrom"  (dateChange)="onDateChanged($event)" >
+            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+            <mat-datepicker #picker1></mat-datepicker>
+          </mat-form-field>
+          
+          <mat-form-field appearance="fill" class='cbo-filter'>
+            <mat-label>תאריך עד-</mat-label>
+            <input matInput [matDatepicker]="picker2" [formControl]="dateTo"  (dateChange)="onDateChanged($event)">
+            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+            <mat-datepicker #picker2></mat-datepicker>
+          </mat-form-field>
+        </div>
+    </div>
+    <div *ngIf="paperList">
+        <div class="tbl-container"> 
+            <div class="row">סינון בצד הקליינט</div>
+            <div class="row">
+              <mat-form-field appearance="fill" dir="rtl" class='cbo-filter'>
+                  <mat-label>בחר הבורסה</mat-label>
+                  <mat-select [(ngModel)]="selectedBursa" (selectionChange)="onBursaChange($event)">
+                      <mat-option *ngFor="let bursa of bursaList" [value]="bursa.Id">
+                      {{bursa.Name}}
+                      </mat-option>
+                  </mat-select>
+              </mat-form-field>
+
+              <mat-form-field appearance="fill" dir="rtl" class='cbo-filter'>
+                  <mat-label>בחר סוג נייר</mat-label>
+                  <mat-select [(ngModel)]="selectedPaperType" (selectionChange)="onPaperTypeChange($event)">
+                    <mat-option *ngFor="let paperType of paperTypeListFiltered" [value]="paperType.Id">
+                      {{paperType.Name}}
+                    </mat-option>
+                  </mat-select>
+              </mat-form-field>
+              
+              <mat-form-field appearance="fill" dir="rtl" class='cbo-filter'>
+                  <mat-label>בחר שם נייר</mat-label>
+                  <mat-select [(ngModel)]="selectedPaperName" (selectionChange)="onPaperNameChange($event)">
+                    <mat-option *ngFor="let paperName of paperNameList" [value]="paperName.Id">
+                      {{paperName.Name}}
+                    </mat-option>
+                  </mat-select>
+              </mat-form-field>
+              
+            <mat-form-field appearance="fill" dir="rtl" class='cbo-filter'>
+                  <mat-label>בחר מס' עסקאות</mat-label>
+                  <mat-select [(ngModel)]="selectedAmount" (selectionChange)="onAmountChange($event)">
+                    <mat-option *ngFor="let amount of amountValueList" [value]="amount.Id">
+                      {{amount.Name}}
+                    </mat-option>
+                  </mat-select>
+              </mat-form-field>  
+            </div>
+            
+          </div>
+            <div class="bs-table">
+              <table class="table  table-hover">
+                <thead>
+                  <tr >
+                    <th scope="col">{{columnNames.PaperName}}</th>
+                    <th scope="col">{{columnNames.PaperTypeValue}}</th>
+                    <th scope="col">{{columnNames.LastDeal}}</th>
+                    <th scope="col">{{columnNames.LastRate}}</th>
+                    <th scope="col">{{columnNames.LastRatePercent}}</th>
+                    <th scope="col">{{columnNames.Amount}}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <ng-container *ngFor="let paper of paperListFiltered | paginate: {
+                    itemsPerPage: pageSize,
+                    currentPage: page,
+                    totalItems: totalPapers}"
+                    >
+                  <tr (click)="expandedElement = expandedElement === paper ? null : paper;onExpanded(paper.PaperId, ShapePaperDetals.Row)">
+                    <td>{{ paper.PaperName}}</td>
+                    <td>{{ paper.PaperTypeValue.Name }}</td>
+                    <td>{{ paper.LastDeal }}</td>
+                    <td>{{ paper.LastRate | number:'1.2-2' }}</td>
+                    <td><div [class.positive]="paper.LastRatePercent > 0"  [class.negative]="paper.LastRatePercent < 0" >{{ paper.LastRatePercent | number:'1.2-2' }}%</div></td>
+                    <td>{{ paper.Amount | number }}</td>
+                  </tr>
+                  <tr >
+                    <td  class='details' [attr.colspan]="columndefs.length" >
+                      <div class="example-element-detail"
+                               [@detailExpand]="paper == expandedElement ? 'expanded' : 'collapsed'">
+                               <app-paper-details [paperId]="paper.PaperId" [shape]="ShapePaperDetals.Row"></app-paper-details>
+                      </div>
+                    </td>
+                  </tr>
+                  </ng-container>
+                 </tbody>
+              </table>
+              <div class="d-flex justify-content-center">
+                  <pagination-controls 
+                    responsive="true" 
+                    previousLabel="Prev" 
+                    nextLabel="Next" 
+                    (pageChange)="onPageChanged($event)">
+                  </pagination-controls>
+              </div>
+
+            <ng-template #nodata ><div class='no-data'>{{noDataMessage}}</div></ng-template> 
+        </div>
+
+    </div>
+</div>
+<app-paper-details></app-paper-details>

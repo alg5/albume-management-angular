@@ -11,10 +11,12 @@
     vertical-align: middle;
     padding-top: 20px;
     margin-left: 5px;
+    margin-top: 5px;
 }
 .paper-details-block{
     
     display:flex;
+    flex-wrap: wrap;
     padding: 5px 25px;
     direction: rtl;
     align-content: center;

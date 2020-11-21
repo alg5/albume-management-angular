@@ -2,7 +2,7 @@
 {
     text-align: right;
     
-    border: 1px solid red;
+    
 }
 .triangle{
 	width: 0;
@@ -11,7 +11,20 @@
     border-left: 65px solid transpare   */
 	border-width: 0 65px 65px 0;
 	border-color: transparent #2dd5c4 transparent transparent;
-	border-style: solid;
+    border-style: solid;
+    position: relative;
+}
+.icon-menu{
+    position:absolute;
+    cursor: pointer;
+    left:34px;
+    top:3px;
+    
+}
+.mat-icon{
+    /* border: 1px solid red; */
+    width:30px;
+    height:30px;
 }
 
 /* border-top: 100px solid red;

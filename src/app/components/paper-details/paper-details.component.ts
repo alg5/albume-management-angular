@@ -51,6 +51,7 @@ export class PaperDetailsComponent implements OnInit {
       this.httpService.subjectPaperDetails.subscribe((data)=>{
         // console.log("this.events.subscribe((data)", data, this.paperId);
         if(data.PaperId == this.paperId && data.Shape == this.shape){
+        // if(data.PaperId == this.paperId ){         
           this.GetDetailsFromApi(data.PaperId);
         }
         

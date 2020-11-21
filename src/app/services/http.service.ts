@@ -107,7 +107,7 @@ export class HttpService {
     // headers.append('Authorization', 'Basic ' + base64.encode(username + ":" + password));
     return this.http.post(res, user).pipe(map(data => {
 
-      console.log("login: ", data);
+      // console.log("login: ", data);
 
       return data;
       
@@ -123,7 +123,7 @@ export class HttpService {
     let params = new HttpParams().set('id', id.toString())
     return this.http.get(res, { params: params }).pipe(map(data => {
 
-      console.log("GetAlbums: ", data);
+      // console.log("GetAlbums: ", data);
 
       return data;
       
@@ -133,4 +133,19 @@ export class HttpService {
         return throwError(err);
       }))
   };
+  changePreference(user: UserModel ): Observable<any>  {
+    const res = "http://localhost:5000/User/ChangePreference";
+    return this.http.post(res, user).pipe(map(data => {
+
+      console.log("ChangePreference: ", data);
+
+      return data;
+      
+    }),
+      catchError(err => {
+        console.log("err: ", err);
+        return throwError(err);
+      }))
+  };
+  
 }

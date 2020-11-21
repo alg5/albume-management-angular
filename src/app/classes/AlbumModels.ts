@@ -2,6 +2,10 @@
 export class UserModel {
     Id :number;
     Name: string;
+    IssueYearPreferenceFilter: number;
+    IssueYearPreferenceSort: number;
+    NameArtistPreferenceFilter: string;
+    NameArtistPreferenceSort: number;
     Password: string;
 }
 export class FileModel {
@@ -13,13 +17,30 @@ export class FileModel {
 export class AlbumModel {
     Id: number;
     Caption:string;
-    IssueYeard: number;
+    IssueYear: number;
     NameArtist:string;
-    SexArtist: SexArtistEnum;
+    Genres: GenresEnum;
     Picture: FileModel;
     Owner: UserModel;
+
 }
-export enum SexArtistEnum {
-    Male= 1,
-    Female,
+export class NameId {
+    Id: number;
+    Name:string;
+  }
+  
+  export class NameIdString {
+    Id: string;
+    Name:string;
+  }
+export enum GenresEnum {
+    RockMusic = 1,
+    ElectronicMusic,
+    SoulMusic,
+    Funk,
+    CountryMusic,
+    LatinMusic,
+    Reggae,
+    HipHopMusic,
+    Polka
 }

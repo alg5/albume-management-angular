@@ -43,7 +43,7 @@ export class LoginPageComponent implements OnInit {
                  const obj = localStorage.getItem(LOCAL_STORAGE_KEY);
                 if (obj){
                   this.albumOwner = JSON.parse(obj);
-                  // this.router.navigate(['/albums']);
+                  this.router.navigate(['/albums']);
                 }
 
                 // console.log("constructor:", obj, this.albumOwner );
@@ -62,7 +62,12 @@ export class LoginPageComponent implements OnInit {
   }
   sendLogin(){
     console.log(this.username, this.password);
-    const  user:UserModel = {Id: 0, Name: this.username, Password: this.password};
+    // const  user:UserModel = {Id: 0, Name: this.username, Password: this.password
+    //                           , IssueYearPreferenceFilter:0, IssueYearPreferenceSort: 0
+    //                           , NameArtistPreferenceFilter: '', NameArtistPreferenceSort: 0 };
+    const  user:UserModel = new UserModel();
+    user.Name =  this.username;
+    user.Password = this.password;
     this.getLoginFromApi(user);
   }
   getLoginFromApi( user:UserModel){
@@ -82,7 +87,8 @@ export class LoginPageComponent implements OnInit {
                   this.errorCode = data['ErrorCode'];
                   if (this.errorCode == 0) 
                   {
-                    const user : UserModel = {Id:data['Login'].Id, Name: data['Login'].Name, Password: "" };
+                    const user : UserModel = data['Login'];
+                    // {Id:data['Login'].Id, Name: data['Login'].Name, Password: "" };
                     localStorage.setItem (LOCAL_STORAGE_KEY, JSON.stringify(user));
                     this.router.navigate(['/albums']);
                   }

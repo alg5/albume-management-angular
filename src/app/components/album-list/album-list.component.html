@@ -1,18 +1,54 @@
-<div *ngIf="isLogged" class="container">
+<div class="container">
     <h2> שלום, {{username}} <span class="header-row">{{lastDate}} | {{lastTime}}&nbsp;:{{translations.LastVisit}}</span></h2>
-    <h3> Paper Details Cube</h3>
-    <div class="albums-block">
-        <ng-container   *ngFor="let album of albumList">
+    <!-- <div class="row"> -->
+        <mat-form-field appearance="fill" dir="rtl" class='cbo-filter'>
+            <mat-label>{{translations.ChooseIssueYear}}</mat-label>
+            <mat-select [(ngModel)]="selectedYear" (selectionChange)="onYearChange($event)">
+                <mat-option *ngFor="let year of yearList" [value]="year.Id">
+                {{year.Name}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    <!-- </div> -->
+    <!-- <div class="row"> -->
+        <mat-form-field appearance="fill" dir="rtl" class='cbo-filter'>
+            <mat-label>{{translations.ChooseIssueYearSort}}</mat-label>
+            <mat-select [(ngModel)]="selectedYearSort" (selectionChange)="onYearSortChange($event)">
+                <mat-option *ngFor="let sorting of yearSorting" [value]="sorting.Id">
+                {{sorting.Name}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    <!-- </div> -->
+    <mat-form-field appearance="fill" dir="rtl" class='cbo-filter'>
+        <mat-label>{{translations.ChooseArtist}}</mat-label>
+        <mat-select [(ngModel)]="selectedArtist" (selectionChange)="onArtistChange($event)">
+            <mat-option *ngFor="let artist of artistList" [value]="artist.Id">
+            {{artist.Name}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="fill" dir="rtl" class='cbo-filter'>
+        <mat-label>{{translations.ChooseArtistSort}}</mat-label>
+        <mat-select [(ngModel)]="selectedArtistSort" (selectionChange)="onArtistSortChange($event)">
+            <mat-option *ngFor="let sorting of artistSorting" [value]="sorting.Id">
+            {{sorting.Name}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <div *ngIf="albumListFiltered && albumListFiltered.length > 0;else nodata" class="albums-block">
+        <ng-container   *ngFor="let album of albumListFiltered">
             <div class="cube-wrap">
-                <div>{{album.Caption}}</div>
-                <div><img src = "http://localhost:5000/images/{{album.Picture.Path}}" /></div>
-                <!-- <div class="cube" (click)="expandedElement = expandedElement === paper ? null : paper;showDetails(paper.Id, ShapePaperDetals.Cube)">{{paper.Name}}</div>
-                <div class="paper-details" [@detailExpand]="paper == expandedElement ? 'expanded' : 'collapsed'">
-                    <app-paper-details [paperId]="paper.Id" [shape]="ShapePaperDetals.Cube"></app-paper-details>
-                </div> -->
+                <div class="album-caption">{{album.Caption}}</div>
+                <div ><img src = "http://localhost:5000/images/{{album.Picture.Path}}"  /></div>
+                <div class="album-bottom-row">{{album.NameArtist}}</div>
+                <div class="album-bottom-row">{{translations.IssueYear}}: {{album.IssueYear}}</div>
+                <div class="album-bottom-row">{{translations.Genres}}: {{album.Genres}}</div>
             </div>
         </ng-container>
-        
     </div>
+    <ng-template #nodata ><div class='no-data'>{{translations.NoDataMessage}}</div></ng-template> 
+
 
 </div>

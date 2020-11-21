@@ -1,22 +1,15 @@
 <div >
     <div class="triangle">
-        <div class='menu-corner'></div>
-        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="icon-button with a menu">
-            <mat-icon>menu</mat-icon>
-        </button>
+        <mat-icon class="icon-menu" [matMenuTriggerFor]="menu">menu</mat-icon>
         <mat-menu #menu="matMenu" xPosition="before">
-            <button mat-menu-item (click)="navigateMenu('login')">
+            <button mat-menu-item (click)="navigateMenu('logout')">
                 <mat-icon>login</mat-icon>
-                <span>Login</span>
+                <span>התנתקות</span>
             </button>
-            <button mat-menu-item (click)="navigateMenu('cube')" >
-                <mat-icon>details</mat-icon>
-                <span>Cube list</span>
+            <button mat-menu-item (click)="navigateMenu('add')" >
+                <mat-icon>add</mat-icon>
+                <span>הוספת אלבום</span>
             </button>
-            <!-- <button mat-menu-item>
-                <mat-icon>notifications_off</mat-icon>
-                <span>Disable alerts</span>
-            </button> -->
         </mat-menu>    
     </div>
    

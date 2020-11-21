@@ -27,10 +27,11 @@ import { PaperDetailsComponent } from '../components/paper-details/paper-details
 import { ListCubePaperDetailsComponent } from '../components/list-cube-paper-details/list-cube-paper-details.component';
 import { LoginPageComponent } from '../components/login-page/login-page.component';
 import { AlbumListComponent } from '../components/album-list/album-list.component';
+import { AlbumActionsComponent } from '../components/album-actions/album-actions.component';
 @NgModule({
   declarations: [ SecuritiesComponent, LiveSearchComponent, MenuCornerComponent, OnlyHebrewDirective
                  , PaperDetailsComponent, ListCubePaperDetailsComponent, LoginPageComponent
-                 , AlbumListComponent
+                 , AlbumListComponent,AlbumActionsComponent
                 ],
   imports: [
     CommonModule,

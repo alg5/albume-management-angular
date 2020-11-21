@@ -1,0 +1,29 @@
+<div class="container">
+    <h2> הוספת אלבום</h2>
+    <form [formGroup]="rForm" >
+        <div class="form-container tbl-container">
+            <h1 class='login-caption'>{{translations.NewAlbum}}</h1>
+            <div class="login-row">
+                <input class="login-input"  matInput type="text" placeholder="כותרת" #usernameobj appAutofocus formControlName="albumCaption" 
+                maxlength="100"[(ngModel)]="albumCaption" >
+                <div class="alert" *ngIf="!rForm.controls['albumCaption'].valid && rForm.controls['albumCaption'].touched">{{ translations.albumCaptionAlert }}</div>
+                
+            </div>
+            <div class="login-row">
+                <input class="login-input"  matInput type="text" placeholder="שנת הוצאה"  formControlName="albumIssueYear"
+                maxlength="100" 
+                [(ngModel)]="albumIssueYear"  >
+                <div class="alert"  *ngIf="!rForm.controls['albumIssueYear'].valid && rForm.controls['albumIssueYear'].touched">{{ translations.albumIssueYearAlert }}</div>
+            </div>
+            <div class="login-row">
+                <input class="login-input"  matInput type="text" placeholder="שם אומן"  formControlName="albumNameArtist"
+                maxlength="100" 
+                [(ngModel)]="albumNameArtist"  >
+                <div class="alert"  *ngIf="!rForm.controls['albumNameArtist'].valid && rForm.controls['albumNameArtist'].touched">{{ translations.albumNameArtistAlert }}</div>
+            </div>
+            
+            <!-- <div class="login-row"><button (click)="sendLogin()" [disabled]="!rForm.valid">התחברות</button></div> -->
+        </div>
+    </form> 
+
+</div>

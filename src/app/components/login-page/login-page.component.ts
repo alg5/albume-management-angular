@@ -45,9 +45,6 @@ export class LoginPageComponent implements OnInit {
                   this.albumOwner = JSON.parse(obj);
                   this.router.navigate(['/albums']);
                 }
-
-                // console.log("constructor:", obj, this.albumOwner );
- 
    }
 
   ngOnInit(): void {
@@ -62,9 +59,6 @@ export class LoginPageComponent implements OnInit {
   }
   sendLogin(){
     console.log(this.username, this.password);
-    // const  user:UserModel = {Id: 0, Name: this.username, Password: this.password
-    //                           , IssueYearPreferenceFilter:0, IssueYearPreferenceSort: 0
-    //                           , NameArtistPreferenceFilter: '', NameArtistPreferenceSort: 0 };
     const  user:UserModel = new UserModel();
     user.Name =  this.username;
     user.Password = this.password;
@@ -88,7 +82,6 @@ export class LoginPageComponent implements OnInit {
                   if (this.errorCode == 0) 
                   {
                     const user : UserModel = data['Login'];
-                    // {Id:data['Login'].Id, Name: data['Login'].Name, Password: "" };
                     localStorage.setItem (LOCAL_STORAGE_KEY, JSON.stringify(user));
                     this.router.navigate(['/albums']);
                   }

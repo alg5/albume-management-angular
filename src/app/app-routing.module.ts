@@ -5,6 +5,7 @@ import { SecuritiesComponent } from './components/securities/securities.componen
 import { ListCubePaperDetailsComponent } from './components/list-cube-paper-details/list-cube-paper-details.component';
 import { LoginPageComponent } from './components/login-page/login-page.component';
 import { AlbumListComponent } from './components/album-list/album-list.component';
+import { AlbumActionsComponent } from './components/album-actions/album-actions.component';
 
 
 
@@ -13,7 +14,7 @@ const routes: Routes = [
   {path: 'login', component: LoginPageComponent},
   // { path: 'register', component: RegisterComponent }
    {path: 'albums', component: AlbumListComponent},
-   
+   {path: 'actions', component: AlbumActionsComponent},
 //  { path: '', redirectTo: 'LoginPageComponent', pathMatch: 'full' }
 ];
 

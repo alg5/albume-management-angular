@@ -15,6 +15,11 @@ export enum BursaEnum {
 }
 
 //***************************** */
+export enum AlbumActions {
+  Add = 1,
+  Edit,
+  Delete
+}
 export enum SortEnum {
   None = 'ללא מיון',
   Asc = 'ASC',

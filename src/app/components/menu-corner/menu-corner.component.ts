@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
+import { AlbumActions, LOCAL_STORAGE_KEY } from 'src/app/classes/enums';
 
 @Component({
   selector: 'app-menu-corner',
@@ -14,11 +15,13 @@ export class MenuCornerComponent implements OnInit {
   }
   navigateMenu(tag){
     switch (tag){
-      case 'login':
-        this.router.navigate(['/login']);
+      case 'logout':
+        //TODO
+        // localStorage.removeItem (LOCAL_STORAGE_KEY);
+        // this.router.navigate(['/login']);
         break;
-        case 'cube':
-          this.router.navigate(['/cube']);
+        case 'add':
+          this.router.navigate(['/actions'], { queryParams: { action: AlbumActions.Add } });
           break;        
     }
     

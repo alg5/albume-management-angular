@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { OnlyHebrewDirective } from './classes/only-hebrew.directive';
+// import { AlbumActionsComponent } from './components/album-actions/album-actions.component';
 // import { AlbumListComponent } from './components/album-list/album-list.component';
 // import { LoginPageComponent } from './components/login-page/login-page.component';
 // import { ListCubePaperDetailsComponent } from './components/list-cube-paper-details/list-cube-paper-details.component';
@@ -24,6 +25,7 @@ import { OnlyHebrewDirective } from './classes/only-hebrew.directive';
 @NgModule({
   declarations: [
     AppComponent,
+    // AlbumActionsComponent,
     // AlbumListComponent,
     // LoginPageComponent,
     // ListCubePaperDetailsComponent,

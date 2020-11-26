@@ -33,3 +33,11 @@ label.mat-form-field-label {
 app-live-search .mat-form-field-infix {
     width: 222px !important;
 }
+.mat-select-value {
+    text-align: right;
+}
+.mat-input-element {
+    background: white !important ;
+    padding-right: 5px !important;
+    /* border: 1px solid red !important; */
+}

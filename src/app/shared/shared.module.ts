@@ -28,10 +28,14 @@ import { ListCubePaperDetailsComponent } from '../components/list-cube-paper-det
 import { LoginPageComponent } from '../components/login-page/login-page.component';
 import { AlbumListComponent } from '../components/album-list/album-list.component';
 import { AlbumActionsComponent } from '../components/album-actions/album-actions.component';
+// import { MatFileUploadModule } from 'mat-file-upload/lib/mat-file-upload.module';
+import { NgxFileDropModule } from 'ngx-file-drop';
+import { OnlyNumericIntegerDirective } from '../classes/only-numeric-integer.directive';
+
 @NgModule({
   declarations: [ SecuritiesComponent, LiveSearchComponent, MenuCornerComponent, OnlyHebrewDirective
                  , PaperDetailsComponent, ListCubePaperDetailsComponent, LoginPageComponent
-                 , AlbumListComponent,AlbumActionsComponent
+                 , AlbumListComponent,AlbumActionsComponent,OnlyNumericIntegerDirective
                 ],
   imports: [
     CommonModule,
@@ -52,6 +56,8 @@ import { AlbumActionsComponent } from '../components/album-actions/album-actions
     MatPaginatorModule,
     MatToolbarModule,
     NgxPaginationModule,
+    NgxFileDropModule
+    // MatFileUploadModule,
     // MatPaginatorIntl
     
 
@@ -75,7 +81,10 @@ import { AlbumActionsComponent } from '../components/album-actions/album-actions
     BrowserModule,
     ReactiveFormsModule,
     OnlyHebrewDirective,
-    NgxPaginationModule
+    NgxPaginationModule,
+    NgxFileDropModule,
+    OnlyNumericIntegerDirective
+    // MatFileUploadModule
   ]
 })
 export class SharedModule { }

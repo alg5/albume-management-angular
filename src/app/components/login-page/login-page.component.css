@@ -4,6 +4,7 @@
     padding: 40px;
     direction: rtl;
     padding-top: 0px;/* TODO */
+    text-align: right;
 }
 
 .container h2 {

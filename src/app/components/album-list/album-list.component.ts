@@ -64,7 +64,7 @@ export class AlbumListComponent implements OnInit {
       //init selections
       this.selectedYear = this.albumOwner.IssueYearPreferenceFilter;
       this.selectedYearSort = this.albumOwner.IssueYearPreferenceSort;
-      this.selectedArtist = !this.albumOwner.IssueYearPreferenceFilter ? TOTAL_TEXT : this.albumOwner.NameArtistPreferenceFilter;
+      this.selectedArtist = !this.albumOwner.NameArtistPreferenceFilter ? TOTAL_TEXT : this.albumOwner.NameArtistPreferenceFilter;
       this.selectedArtistSort = this.albumOwner.NameArtistPreferenceSort;
       this.getDataFromApi();
  
@@ -77,16 +77,11 @@ export class AlbumListComponent implements OnInit {
     this.httpService.getAlbums( this.albumOwner.Id)
       .subscribe(
               data => {
-                  console.log(" getAlbums data: ", data); 
                   if(!data) {
                     //TODO
-                    // this.errMsg = "המשתמש לא נמצא";
-                    // this.loading = false;
-                  
                     return;
                   }
                   this.fillData(data);
-                  // this.dataSource = new MatTableDataSource<PaperModel>(this.paperListFiltered);
                },
               error => {
                 //TODO
@@ -98,7 +93,7 @@ export class AlbumListComponent implements OnInit {
   fillData(data)
   {
     this.albumList =  data['GetAlbums'];
-    console.log(" fillData: ", this.albumList); 
+    // console.log(" fillData: ", this.albumList); 
     this.fillYears();
     this.fillYearsSorting();
     this.fillArtists();
@@ -114,13 +109,11 @@ export class AlbumListComponent implements OnInit {
     let year: NameId = {Id:TOTAL, Name:TOTAL_TEXT};
     this.yearList.push(year);
     arrSet.forEach((item, index) => {
-      // console.log(item); // 9, 2, 5
-      console.log(index); // 0, 1, 2
-      let year: NameId = {Id:index, Name:item.toString()};
-      this.yearList.push(year);
+    let year: NameId = {Id:index, Name:item.toString()};
+    this.yearList.push(year);
 
   });
-    console.log("this.yearList=", this.yearList);
+  
   }
   fillYearsSorting(){
     this.yearSorting = new Array<NameId>();
@@ -138,12 +131,11 @@ export class AlbumListComponent implements OnInit {
     const arrSet  = new Set(arr); 
     let artist: NameIdString = {Id:TOTAL_TEXT, Name:TOTAL_TEXT};
     this.artistList.push(artist);
-    // let index = 1;
     arrSet.forEach((item) => {
       let artist: NameIdString = {Id:item, Name:item};
       this.artistList.push(artist);
       }); 
-    console.log("this.artistList=", this.artistList);
+
   }
   fillArtistSorting(){
     this.artistSorting = new Array<NameId>();
@@ -182,21 +174,21 @@ export class AlbumListComponent implements OnInit {
   
   onYearChange($event)
   {
-    console.log ("onYearChange", $event, $event.value, this.selectedYear);
+    // console.log ("onYearChange", $event, $event.value, this.selectedYear);
     this.filteredData();
     this.albumOwner.IssueYearPreferenceFilter = this.selectedYear;
     this.changePreferenceApi();
   }
   onYearSortChange($event)
   {
-    console.log ("onYearSortChange", $event, $event.value, this.selectedYearSort);
+    // console.log ("onYearSortChange", $event, $event.value, this.selectedYearSort);
     this.sortedData();
     this.albumOwner.IssueYearPreferenceSort = this.selectedYearSort;
     this.changePreferenceApi();
   }
   onArtistChange($event)
   {
-    console.log ("onArtistChange", $event, $event.value, this.selectedArtist);
+    // console.log ("onArtistChange", $event, $event.value, this.selectedArtist);
     this.filteredData();
     this.albumOwner.NameArtistPreferenceFilter = this.selectedArtist;
     this.changePreferenceApi();
@@ -204,7 +196,7 @@ export class AlbumListComponent implements OnInit {
   }
   onArtistSortChange($event)
   {
-    console.log ("onArtistSortChange", $event, $event.value, this.selectedArtistSort);
+    // console.log ("onArtistSortChange", $event, $event.value, this.selectedArtistSort);
     this.sortedData();
     this.albumOwner.NameArtistPreferenceSort = this.selectedArtistSort;
     this.changePreferenceApi();
@@ -229,12 +221,10 @@ export class AlbumListComponent implements OnInit {
     this.httpService.changePreference( this.albumOwner)
       .subscribe(
               data => {
-                  console.log(" changePreferenceApi data: ", data); 
                   if(!data) {
                     //TODO
                     return;
                   }
-                 // this.fillData(data);
                  //update local storage
                  const user : UserModel = data['ChangePreference'];
                  localStorage.setItem (LOCAL_STORAGE_KEY, JSON.stringify(user));

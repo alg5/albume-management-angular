@@ -1,29 +1,100 @@
 <div class="container">
+    <app-menu-corner></app-menu-corner>
     <h2> הוספת אלבום</h2>
     <form [formGroup]="rForm" >
         <div class="form-container tbl-container">
             <h1 class='login-caption'>{{translations.NewAlbum}}</h1>
             <div class="login-row">
-                <input class="login-input"  matInput type="text" placeholder="כותרת" #usernameobj appAutofocus formControlName="albumCaption" 
-                maxlength="100"[(ngModel)]="albumCaption" >
-                <div class="alert" *ngIf="!rForm.controls['albumCaption'].valid && rForm.controls['albumCaption'].touched">{{ translations.albumCaptionAlert }}</div>
+                <input class="login-input"  matInput type="text" placeholder="כותרת"  appAutofocus formControlName="albumCaption" maxlength="100" >
+            </div>
+            <div class="alert" *ngIf="!rForm.controls['albumCaption'].valid && rForm.controls['albumCaption'].touched">{{ translations.albumCaptionAlert }}</div>
+
+            <div class="login-row">
+                <input class="login-input" onlyNumericInteger matInput type="text" placeholder="שנת הוצאה"  formControlName="albumIssueYear"  maxlength="4" >
+             </div>
+             <div class="alert" *ngIf="!rForm.controls['albumIssueYear'].valid && rForm.controls['albumIssueYear'].touched">{{ translations.albumeIssuYearAlert }}</div>
+
+            <div class="login-row">
+                <input class="login-input"  matInput type="text" placeholder="שם אומן"  formControlName="albumNameArtist" maxlength="100" >
+            </div>
+            <div class="alert"  *ngIf="!rForm.controls['albumNameArtist'].valid && rForm.controls['albumNameArtist'].touched">{{ translations.albumNameArtistAlert }}</div>
+
+            <div class="login-row">
+                <mat-form-field appearance="fill" dir="rtl" class='cbo-filter' >
+                    <mat-label>{{translations.chooseAlbumGenres}}</mat-label>
+                    <mat-select  (selectionChange)="onGenresChange($event)" formControlName="albumGenres">
+                        <mat-option *ngFor="let g of genresArr" [value]="g.Id">
+                        {{g.Name}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="upload">
+                <!-- <mat-form-field appearance="fill" dir="rtl" class='cbo-filter'>
+
+                    <div class="myfilebrowser">
                 
+                   
+                        <input class="login-input" matInput formControlName="albumPicture" readonly name="memberContactNo" />
+                
+                        
+                    <input type="file"   #UploadFileInput id="fileUpload" (change)="fileChangeEvent($event)" name="fileUpload"
+                        multiple="multiple" accept="image/*" />
+                
+                    </div>
+                
+                </mat-form-field> -->
+            <!-- ***************************************** -->
+            
+                <ngx-file-drop dropZoneLabel="Drop files here" 
+                    (onFileDrop)="dropped($event)" 
+                    (onFileOver)="fileOver($event)" 
+                    (onFileLeave)="fileLeave($event)">
+                    <ng-template ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
+                       <div class="drop-aria">Drop files here</div> 
+                      <button type="button" (click)="openFileSelector()">Browse Files</button>
+                    </ng-template>
+                </ngx-file-drop>
+                <div class="upload-table">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>שם קובץ</th>
+                            </tr>
+                        </thead>
+                        <tbody class="upload-name-style">
+                            <tr *ngFor="let item of files; let i=index">
+                                <td><strong>{{ item.relativePath }}</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+             <!-- *****************************************            -->
             </div>
-            <div class="login-row">
-                <input class="login-input"  matInput type="text" placeholder="שנת הוצאה"  formControlName="albumIssueYear"
-                maxlength="100" 
-                [(ngModel)]="albumIssueYear"  >
-                <div class="alert"  *ngIf="!rForm.controls['albumIssueYear'].valid && rForm.controls['albumIssueYear'].touched">{{ translations.albumIssueYearAlert }}</div>
-            </div>
-            <div class="login-row">
-                <input class="login-input"  matInput type="text" placeholder="שם אומן"  formControlName="albumNameArtist"
-                maxlength="100" 
-                [(ngModel)]="albumNameArtist"  >
-                <div class="alert"  *ngIf="!rForm.controls['albumNameArtist'].valid && rForm.controls['albumNameArtist'].touched">{{ translations.albumNameArtistAlert }}</div>
+            <!-- ################################ -->
+            <!-- <dl>
+                <dt>
+                    <label asp-for="FileUpload.FormFile"></label>
+                </dt>
+                <dd>
+                    <input asp-for="FileUpload.FormFile" type="file">
+                    <span asp-validation-for="FileUpload.FormFile"></span>
+                </dd>
+            </dl>
+            <input asp-page-handler="Upload" class="btn" type="submit" value="Upload" />             -->
+
+            <!-- ################################ -->  
+            <div class="dropzone">
+                
+
             </div>
             
-            <!-- <div class="login-row"><button (click)="sendLogin()" [disabled]="!rForm.valid">התחברות</button></div> -->
+             <!-- ################################ --> 
+            <!-- [disabled]="!rForm.valid" -->
+            <div class="login-row"><button (click)="sendNewAlbum()">התחברות</button></div>
         </div>
     </form> 
+
 
 </div>

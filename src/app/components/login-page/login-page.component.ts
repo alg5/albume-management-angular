@@ -60,7 +60,7 @@ export class LoginPageComponent implements OnInit {
   sendLogin(){
     console.log(this.username, this.password);
     const  user:UserModel = new UserModel();
-    user.Name =  this.username;
+    user.Login =  this.username;
     user.Password = this.password;
     this.getLoginFromApi(user);
   }
@@ -86,7 +86,7 @@ export class LoginPageComponent implements OnInit {
                     this.router.navigate(['/albums']);
                   }
                   else{
-                    localStorage.setItem (LOCAL_STORAGE_KEY, null);
+                    localStorage.removeItem (LOCAL_STORAGE_KEY);
                   }
                },
               error => {

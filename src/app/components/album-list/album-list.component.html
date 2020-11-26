@@ -2,6 +2,7 @@
     <app-menu-corner></app-menu-corner>
     <h2> שלום, {{username}} <span class="header-row">{{lastDate}} | {{lastTime}}&nbsp;:{{translations.LastVisit}}</span></h2>
     <!-- <div class="row"> -->
+    <div class="cbo-block">
         <mat-form-field appearance="fill" dir="rtl" class='cbo-filter'>
             <mat-label>{{translations.ChooseIssueYear}}</mat-label>
             <mat-select [(ngModel)]="selectedYear" (selectionChange)="onYearChange($event)">
@@ -21,32 +22,37 @@
             </mat-select>
         </mat-form-field>
     <!-- </div> -->
-    <mat-form-field appearance="fill" dir="rtl" class='cbo-filter'>
-        <mat-label>{{translations.ChooseArtist}}</mat-label>
-        <mat-select [(ngModel)]="selectedArtist" (selectionChange)="onArtistChange($event)">
-            <mat-option *ngFor="let artist of artistList" [value]="artist.Id">
-            {{artist.Name}}
-            </mat-option>
-        </mat-select>
-    </mat-form-field>
-    <mat-form-field appearance="fill" dir="rtl" class='cbo-filter'>
-        <mat-label>{{translations.ChooseArtistSort}}</mat-label>
-        <mat-select [(ngModel)]="selectedArtistSort" (selectionChange)="onArtistSortChange($event)">
-            <mat-option *ngFor="let sorting of artistSorting" [value]="sorting.Id">
-            {{sorting.Name}}
-            </mat-option>
-        </mat-select>
-    </mat-form-field>
-
+        <mat-form-field appearance="fill" dir="rtl" class='cbo-filter'>
+            <mat-label>{{translations.ChooseArtist}}</mat-label>
+            <mat-select [(ngModel)]="selectedArtist" (selectionChange)="onArtistChange($event)">
+                <mat-option *ngFor="let artist of artistList" [value]="artist.Id">
+                {{artist.Name}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="fill" dir="rtl" class='cbo-filter'>
+            <mat-label>{{translations.ChooseArtistSort}}</mat-label>
+            <mat-select [(ngModel)]="selectedArtistSort" (selectionChange)="onArtistSortChange($event)">
+                <mat-option *ngFor="let sorting of artistSorting" [value]="sorting.Id">
+                {{sorting.Name}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
     <div *ngIf="albumListFiltered && albumListFiltered.length > 0;else nodata" class="albums-block">
         <ng-container   *ngFor="let album of albumListFiltered">
-            <div class="cube-wrap">
-                <div class="album-caption">{{album.Caption}}</div>
-                <div ><img src = "http://localhost:5000/images/{{album.Picture.Path}}"  /></div>
-                <div class="album-bottom-row">{{album.NameArtist}}</div>
-                <div class="album-bottom-row">{{translations.IssueYear}}: {{album.IssueYear}}</div>
-                <div class="album-bottom-row">{{translations.Genres}}: {{album.Genres}}</div>
-            </div>
+             <mat-card class="example-card">
+                <mat-card-header>
+                    <mat-card-title>{{album.Caption}}</mat-card-title>
+                    <div mat-card-avatar class="example-header-image"></div>
+                </mat-card-header>
+                 <img mat-card-image src="{{album.Picture.Path}}" alt="Photo of a {{album.Caption}}">
+                <mat-card-content>
+                    <div class="album-bottom-row"><i>{{album.NameArtist}}</i></div>
+                    <div class="album-bottom-row">{{translations.IssueYear}}: {{album.IssueYear}}</div>
+                    <div class="album-bottom-row">{{translations.Genres}}: {{album.GenresDesc}}</div>
+                </mat-card-content>
+            </mat-card>
         </ng-container>
     </div>
     <ng-template #nodata ><div class='no-data'>{{translations.NoDataMessage}}</div></ng-template> 

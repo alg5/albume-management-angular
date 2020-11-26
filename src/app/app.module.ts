@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { OnlyHebrewDirective } from './classes/only-hebrew.directive';
+// import { OnlyNumericIntegerDirective } from './classes/only-numeric-integer.directive';
 // import { AlbumActionsComponent } from './components/album-actions/album-actions.component';
 // import { AlbumListComponent } from './components/album-list/album-list.component';
 // import { LoginPageComponent } from './components/login-page/login-page.component';
@@ -25,6 +26,7 @@ import { OnlyHebrewDirective } from './classes/only-hebrew.directive';
 @NgModule({
   declarations: [
     AppComponent,
+    // OnlyNumericIntegerDirective,
     // AlbumActionsComponent,
     // AlbumListComponent,
     // LoginPageComponent,
@@ -44,6 +46,7 @@ import { OnlyHebrewDirective } from './classes/only-hebrew.directive';
     // BrowserAnimationsModule
      
   ],
+  exports: [],
   providers: [DatePipe, HttpService],
 
   bootstrap: [AppComponent]

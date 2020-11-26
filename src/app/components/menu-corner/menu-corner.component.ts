@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import { AlbumActions, LOCAL_STORAGE_KEY } from 'src/app/classes/enums';
+import { HttpService } from 'src/app/services/http.service';
 
 @Component({
   selector: 'app-menu-corner',
@@ -9,7 +10,7 @@ import { AlbumActions, LOCAL_STORAGE_KEY } from 'src/app/classes/enums';
 })
 export class MenuCornerComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private httpService: HttpService) { }
 
   ngOnInit(): void {
   }
@@ -17,15 +18,18 @@ export class MenuCornerComponent implements OnInit {
     switch (tag){
       case 'logout':
         //TODO
-        // localStorage.removeItem (LOCAL_STORAGE_KEY);
-        // this.router.navigate(['/login']);
+        localStorage.removeItem (LOCAL_STORAGE_KEY);
+        this.router.navigate(['/login']);
         break;
-        case 'add':
-          this.router.navigate(['/actions'], { queryParams: { action: AlbumActions.Add } });
-          break;        
+      case 'add':
+        this.router.navigate(['/actions'], { queryParams: { action: AlbumActions.Add } });
+        break;        
     }
     
   }
-
+  savetest()
+  {
+    this.httpService.SubjectTestValid.next(null);
+  }
 
 }

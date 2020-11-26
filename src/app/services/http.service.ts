@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 // import { User } from './user';
 import { Observable, Subject, throwError } from 'rxjs';
-import { map, catchError } from 'rxjs/operators';
+import { map, catchError, mergeMap, switchMap } from 'rxjs/operators';
 import { SubjectPaperDetails } from '../classes/BursaModels';
-import { UserModel } from '../classes/AlbumModels';
+import { AlbumModel, UserModel } from '../classes/AlbumModels';
 // import { Customer } from '../objects/Customer';
 //  import { PaperModel } from '../Models/PaperModel';
 
@@ -12,6 +12,7 @@ import { UserModel } from '../classes/AlbumModels';
 export class HttpService {
 
   subjectPaperDetails: Subject<SubjectPaperDetails> =  new Subject<SubjectPaperDetails>();
+  SubjectTestValid: Subject<any> =  new Subject<any>();
 
   constructor(private http: HttpClient) { }
 
@@ -73,27 +74,7 @@ export class HttpService {
   };
 
   //TODO remove to LoginService
-  userId: number = 0;
-  username: string = '';
-  localStorageKey: string = '';
-  // login(username :string, password:string ): Observable<any>  {
-  //   //const strUsers = "assets/users.json";
-  //   // const res = "http://localhost:5000/Album/Login";
-  //   const res = "http://localhost:5000/User/Login";
-  //   let params = new HttpParams().set('username', username).set('password', password)
-  //   return this.http.get(res, { params: params }).pipe(map(data => {
-
-  //     console.log("login: ", data);
-
-  //     return data;
-      
-  //   }),
-  //     catchError(err => {
-  //       console.log("err: ", err);
-  //       return throwError(err);
-  //     }))
-  // };
-
+ 
   login(user: UserModel ): Observable<any>  {
     const res = "http://localhost:5000/User/Login";
     // headers.append('Content-Type', 'application/json');
@@ -147,5 +128,106 @@ export class HttpService {
         return throwError(err);
       }))
   };
+  addAlbumBk(album: AlbumModel, f:FormData): Observable<any>  {
+
+
+    const urlUpload = "http://localhost:5000/Album/UploadAlbumImage";
+    const urlAddAlbum = "http://localhost:5000/Album/AddAlbum";
+    let params = new HttpParams().set('login', "tom");
+    return this.http.post(urlUpload, f, { params: params },).pipe(
+      switchMap(data=> this.http.post(urlAddAlbum, album).pipe(map(data1 =>{
+        console.log("1234", data);
+        console.log("12345", data1);
+        return data1;
+      }))
+      )
+      ,
+      catchError(err => {
+        console.log("err9876: ", err);
+        return throwError(err);
+      })
+    );
+  };
+
+
+  //***************************************************** */
+  addAlbum1(album: AlbumModel, f:FormData): Observable<any>  {
+    // enctype="multipart/form-data"
+    // { headers: headers, responseType: 'blob' }
+  //   const httpOptions = {
+  //     headers: new HttpHeaders({
+  //         'Content-Type':  'application/json',
+  //        'enctype' :"multipart/form-data",
+         
+
+  //       }), responseType: 'blob'
+  // };
+
+  const headers = new HttpHeaders({
+    'Content-Type' :"multipart/form-data;",
+    'enctype' :"multipart/form-data; "
+  })
+    // const res = "http://localhost:5000/Album/AddAlbum";
+    const res = "http://localhost:5000/Album/UploadAlbumImage";
+    // return this.http.post(res, [album, f]).pipe(map(data => {
+      // , { headers: headers, responseType: 'blob' }
+      let params = new HttpParams().set('login', "tom");
+      return this.http.post(res, f, { params: params }).pipe(map(data => {
+
+      console.log("addAlbum: ", data);
+
+      return data;
+      
+    }),
+      catchError(err => {
+        console.log("err: ", err);
+        return throwError(err);
+      }))
+  };
+  addAlbum(album: AlbumModel, f:FormData): Observable<any>  {
+
+
+    const urlUpload = "http://localhost:5000/Album/UploadAlbumImage";
+    const urlAddAlbum = "http://localhost:5000/Album/AddAlbum";
+    let params = new HttpParams().set('login', "tom");
+    return this.http.post(urlUpload, f, { params: params }).pipe(map(data => {
+
+      const pic = data['UploadAlbumImage'];
+      album.Picture = pic;
+      console.log("addAlbum 1 step: ", data, pic);
+
+      // return album;
+      
+    }),
+    mergeMap(data=> this.http.post(urlAddAlbum, album).pipe(map(data => {
+      console.log("addAlbum 2 step: ", data);
+      return data;
+      
+    }),
+      catchError(err => {
+        console.log("err9876: ", err);
+        return throwError(err);
+      })
+    )));
+  };
+
+  //*************************************** */
+  uploadAlbumImage( f:FormData): Observable<any>  {
+
+    const res = "http://localhost:5000/Album/UploadAlbumImage";
+      let params = new HttpParams().set('login', "tom");
+      return this.http.post(res, f, { params: params }).pipe(map(data => {
+
+      console.log("uploadAlbumImage: ", data);
+
+      return data;
+      
+    }),
+      catchError(err => {
+        console.log("err: ", err);
+        return throwError(err);
+      }))
+  };
+
   
 }

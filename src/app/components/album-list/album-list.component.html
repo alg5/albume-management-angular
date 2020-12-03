@@ -1,7 +1,7 @@
 <div class="container">
     <app-menu-corner></app-menu-corner>
     <h2> שלום, {{username}} <span class="header-row">{{lastDate}} | {{lastTime}}&nbsp;:{{translations.LastVisit}}</span></h2>
-    <!-- <div class="row"> -->
+
     <div class="cbo-block">
         <mat-form-field appearance="fill" dir="rtl" class='cbo-filter'>
             <mat-label>{{translations.ChooseIssueYear}}</mat-label>
@@ -11,8 +11,7 @@
                 </mat-option>
             </mat-select>
         </mat-form-field>
-    <!-- </div> -->
-    <!-- <div class="row"> -->
+
         <mat-form-field appearance="fill" dir="rtl" class='cbo-filter'>
             <mat-label>{{translations.ChooseIssueYearSort}}</mat-label>
             <mat-select [(ngModel)]="selectedYearSort" (selectionChange)="onYearSortChange($event)">
@@ -21,7 +20,7 @@
                 </mat-option>
             </mat-select>
         </mat-form-field>
-    <!-- </div> -->
+
         <mat-form-field appearance="fill" dir="rtl" class='cbo-filter'>
             <mat-label>{{translations.ChooseArtist}}</mat-label>
             <mat-select [(ngModel)]="selectedArtist" (selectionChange)="onArtistChange($event)">
@@ -30,6 +29,7 @@
                 </mat-option>
             </mat-select>
         </mat-form-field>
+
         <mat-form-field appearance="fill" dir="rtl" class='cbo-filter'>
             <mat-label>{{translations.ChooseArtistSort}}</mat-label>
             <mat-select [(ngModel)]="selectedArtistSort" (selectionChange)="onArtistSortChange($event)">
@@ -39,6 +39,7 @@
             </mat-select>
         </mat-form-field>
     </div>
+
     <div *ngIf="albumListFiltered && albumListFiltered.length > 0;else nodata" class="albums-block">
         <ng-container   *ngFor="let album of albumListFiltered">
              <mat-card class="example-card">
@@ -52,6 +53,13 @@
                     <div class="album-bottom-row">{{translations.IssueYear}}: {{album.IssueYear}}</div>
                     <div class="album-bottom-row">{{translations.Genres}}: {{album.GenresDesc}}</div>
                 </mat-card-content>
+                <mat-card-footer>
+                    <nav>
+                        <a class="button action-link"(click)="navigateAction(AlbumActions.Edit, album.Id)"><mat-icon>edit</mat-icon></a>                       
+                        <a class="button action-link"(click)="navigateAction(AlbumActions.Delete, album.Id)"><mat-icon>delete</mat-icon></a>                       
+                        <!-- <a class="button" routerLink="/actions?action=3"><mat-icon>delete</mat-icon></a> -->
+                    </nav>
+                </mat-card-footer>
             </mat-card>
         </ng-container>
     </div>

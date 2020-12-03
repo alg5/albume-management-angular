@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import { AlbumActions, LOCAL_STORAGE_KEY } from 'src/app/classes/enums';
-import { HttpService } from 'src/app/services/http.service';
+import { HttpService } from 'src/app/core/services/http.service';
 
 @Component({
   selector: 'app-menu-corner',

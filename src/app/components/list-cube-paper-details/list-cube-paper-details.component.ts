@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
 import { PaperNameModel, SubjectPaperDetails } from 'src/app/classes/BursaModels';
 import { ShapePaperDetals } from 'src/app/classes/enums';
-import { HttpService } from 'src/app/services/http.service';
+import { HttpService } from 'src/app/core/services/http.service';
 
 @Component({
   selector: 'app-list-cube-paper-details',

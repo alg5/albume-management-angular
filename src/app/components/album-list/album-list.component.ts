@@ -1,9 +1,10 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { HttpService } from 'src/app/services/http.service';
+import { HttpService } from 'src/app/core/services/http.service';
 import { AlbumModel, NameId, NameIdString, UserModel } from 'src/app/classes/AlbumModels';
-import { LOCAL_STORAGE_KEY, SortEnum, TOTAL, TOTAL_TEXT, WITHOUT_SORTING } from 'src/app/classes/enums';
+import { AlbumActions, LOCAL_STORAGE_KEY, SortEnum, TOTAL, TOTAL_TEXT, WITHOUT_SORTING } from 'src/app/classes/enums';
+import { AlbumService } from 'src/app/core/services/album.service';
 
 @Component({
   selector: 'app-album-list',
@@ -12,6 +13,7 @@ import { LOCAL_STORAGE_KEY, SortEnum, TOTAL, TOTAL_TEXT, WITHOUT_SORTING } from 
 })
 export class AlbumListComponent implements OnInit {
 
+  AlbumActions = AlbumActions;
   lastTime: string;
   lastDate:string;
   username :string;
@@ -43,7 +45,11 @@ export class AlbumListComponent implements OnInit {
   artistList: NameIdString[];
   artistSorting: NameId[];
 
-  constructor(private datePipe: DatePipe, private httpService: HttpService, private router: Router) { 
+  constructor(private datePipe: DatePipe
+              , private httpService: HttpService
+              , private albumService: AlbumService
+              , private router: Router
+              ) { 
       const obj = localStorage.getItem(LOCAL_STORAGE_KEY);
       if (!obj){
         this.router.navigate(['/login']);
@@ -74,7 +80,7 @@ export class AlbumListComponent implements OnInit {
   getDataFromApi(){
     
   
-    this.httpService.getAlbums( this.albumOwner.Id)
+    this.albumService.getAlbums( this.albumOwner.Id)
       .subscribe(
               data => {
                   if(!data) {
@@ -234,6 +240,9 @@ export class AlbumListComponent implements OnInit {
 
     });
 
+  }
+  navigateAction(action: AlbumActions, albumId:number){
+    this.router.navigate(['/actions'], { queryParams: { action: action, id:albumId } });
   }
 
 

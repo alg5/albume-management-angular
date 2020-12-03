@@ -5,6 +5,13 @@
     direction: rtl;
     padding-top: 0px;/* TODO */
 }
+.album-actions{
+  /* display:grid;
+  grid-template-rows: 1fr ;
+  grid-template-columns: 1fr 1fr ;
+  grid-gap: 2vw;
+  border: 1px solid red; */
+}
 
 .container h2 {
     text-align: right;
@@ -21,6 +28,17 @@
     background: #2dd5c4;
     /* background: #99ccff;  */
        padding: 20px;
+       display:grid;
+       grid-template-rows: 1fr ;
+       grid-template-columns: 1fr 1fr ;
+       grid-gap: 2vw;
+       border: 1px solid red;
+}
+.tbl-container > mat-card-content {
+  /* font-size: 5vw;
+  padding: .5em; */
+  border: 1px solid gold;
+  text-align: center;
 }
 
 table {
@@ -323,13 +341,13 @@ ul li{
     width:130px;
     margin: 0 auto;
 }
-.login-row
+.row-flex
 {
-    padding: 13px;
+    padding: 0 s13px;
     display: flex;
     text-align: right;
 }
-.login-input{
+.action-input{
     height: 40px;
     width: 300px;
     margin-left: 260px;
@@ -351,4 +369,18 @@ ul li{
     display: flex;
     padding: 0 13px;
     margin-bottom: 0;
+}
+.example-card {
+  max-width: 400px;
+  background-color: #fff;
+  padding: 16px;
+  margin: 10px 37px;
+  -webkit-box-shadow: 0 15px 10px rgba(0,0,0,0.2);
+  -moz-box-shadow: 0 15px 10px rgba(0,0,0,0.2);
+  box-shadow: 0 15px 10px  rgba(0,0,0,0.2);
+/*  -webkit-transform: rotate(-3deg);
+  -moz-transform: rotate(-3deg);
+   -o-transform: rotate(-3deg);
+  -ms-transform: rotate(-3deg);
+  transform: rotate(-3deg); */
 }

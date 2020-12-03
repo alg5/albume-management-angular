@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { PaperModel } from 'src/app/classes/BursaModels';
 import { ShapePaperDetals } from 'src/app/classes/enums';
-import { HttpService } from 'src/app/services/http.service';
+import { HttpService } from 'src/app/core/services/http.service';
 
 @Component({
   selector: 'app-paper-details',
@@ -51,7 +51,6 @@ export class PaperDetailsComponent implements OnInit {
       this.httpService.subjectPaperDetails.subscribe((data)=>{
         // console.log("this.events.subscribe((data)", data, this.paperId);
         if(data.PaperId == this.paperId && data.Shape == this.shape){
-        // if(data.PaperId == this.paperId ){         
           this.GetDetailsFromApi(data.PaperId);
         }
         

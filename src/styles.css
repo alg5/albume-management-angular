@@ -41,3 +41,8 @@ app-live-search .mat-form-field-infix {
     padding-right: 5px !important;
     /* border: 1px solid red !important; */
 }
+app-album-actions .ngx-file-drop__drop-zone
+,app-album-actions .ngx-file-drop__content
+{
+    height:60px !important;
+}

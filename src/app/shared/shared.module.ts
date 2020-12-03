@@ -14,7 +14,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import {MatIconModule} from '@angular/material/icon';
 import {  MatDatepickerModule,  } from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
-import { OnlyHebrewDirective } from '../classes/only-hebrew.directive';
+import { OnlyHebrewDirective } from '../directives/only-hebrew.directive';
 import {MatListModule} from '@angular/material/list';
 import {MatMenuModule} from '@angular/material/menu';
 import { MatPaginatorIntl, MatPaginatorModule } from '@angular/material/paginator';
@@ -30,12 +30,17 @@ import { AlbumListComponent } from '../components/album-list/album-list.componen
 import { AlbumActionsComponent } from '../components/album-actions/album-actions.component';
 // import { MatFileUploadModule } from 'mat-file-upload/lib/mat-file-upload.module';
 import { NgxFileDropModule } from 'ngx-file-drop';
-import { OnlyNumericIntegerDirective } from '../classes/only-numeric-integer.directive';
+import { OnlyNumericIntegerDirective } from '../directives/only-numeric-integer.directive';
+import { FieldErrorDisplayComponent } from '../components/field-error-display/field-error-display.component';
+import { MatButtonModule } from '@angular/material/button';
+import {MatCardModule} from '@angular/material/card';
+import {MatGridListModule} from '@angular/material/grid-list'
 
 @NgModule({
   declarations: [ SecuritiesComponent, LiveSearchComponent, MenuCornerComponent, OnlyHebrewDirective
                  , PaperDetailsComponent, ListCubePaperDetailsComponent, LoginPageComponent
                  , AlbumListComponent,AlbumActionsComponent,OnlyNumericIntegerDirective
+                 , FieldErrorDisplayComponent
                 ],
   imports: [
     CommonModule,
@@ -43,6 +48,7 @@ import { OnlyNumericIntegerDirective } from '../classes/only-numeric-integer.dir
     MatFormFieldModule,
     MatSelectModule,
     MatInputModule,
+    MatButtonModule,
     FormsModule,
     BrowserAnimationsModule,
     MatAutocompleteModule,
@@ -55,6 +61,8 @@ import { OnlyNumericIntegerDirective } from '../classes/only-numeric-integer.dir
     MatMenuModule,
     MatPaginatorModule,
     MatToolbarModule,
+    MatCardModule,
+    MatGridListModule,
     NgxPaginationModule,
     NgxFileDropModule
     // MatFileUploadModule,
@@ -67,6 +75,7 @@ import { OnlyNumericIntegerDirective } from '../classes/only-numeric-integer.dir
     MatFormFieldModule,
     MatSelectModule,
     MatInputModule,
+    MatButtonModule,
     MatIconModule,
     MatDatepickerModule,
     MatNativeDateModule,
@@ -78,6 +87,8 @@ import { OnlyNumericIntegerDirective } from '../classes/only-numeric-integer.dir
     FormsModule,
     BrowserAnimationsModule,
     MatAutocompleteModule,
+    MatCardModule,
+    MatGridListModule,    
     BrowserModule,
     ReactiveFormsModule,
     OnlyHebrewDirective,

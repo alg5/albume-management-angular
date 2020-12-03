@@ -355,3 +355,6 @@ mat-card-title {
 .mat-form-field {
   margin: 0 10px;
 }
+.action-link{
+  cursor: pointer;
+}

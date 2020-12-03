@@ -5,11 +5,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
 import { DatePipe } from '@angular/common';
-import { HttpService } from './services/http.service';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpService } from './core/services/http.service';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+// import { AuthInterceptor, } from './interceptors/auth.interceptor';
+import { httpInterceptorProviders } from "./interceptors";
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
-import { OnlyHebrewDirective } from './classes/only-hebrew.directive';
+// import { OnlyHebrewDirective } from './directives/only-hebrew.directive';
+// import { FieldErrorDisplayComponent } from './components/field-error-display/field-error-display.component';
 // import { OnlyNumericIntegerDirective } from './classes/only-numeric-integer.directive';
 // import { AlbumActionsComponent } from './components/album-actions/album-actions.component';
 // import { AlbumListComponent } from './components/album-list/album-list.component';
@@ -26,6 +29,7 @@ import { OnlyHebrewDirective } from './classes/only-hebrew.directive';
 @NgModule({
   declarations: [
     AppComponent,
+    // FieldErrorDisplayComponent,
     // OnlyNumericIntegerDirective,
     // AlbumActionsComponent,
     // AlbumListComponent,
@@ -47,7 +51,15 @@ import { OnlyHebrewDirective } from './classes/only-hebrew.directive';
      
   ],
   exports: [],
-  providers: [DatePipe, HttpService],
+  providers: [DatePipe, 
+              HttpService,
+              httpInterceptorProviders
+              // {
+              //   provide: HTTP_INTERCEPTORS,
+              //   useClass: AuthInterceptor,
+              //   multi: true,
+              // },
+            ],
 
   bootstrap: [AppComponent]
 })

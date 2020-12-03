@@ -1,100 +1,141 @@
-<div class="container">
+<div class="container album-actions">    
+    <mat-card class="my-card">
     <app-menu-corner></app-menu-corner>
-    <h2> הוספת אלבום</h2>
-    <form [formGroup]="rForm" >
-        <div class="form-container tbl-container">
-            <h1 class='login-caption'>{{translations.NewAlbum}}</h1>
-            <div class="login-row">
-                <input class="login-input"  matInput type="text" placeholder="כותרת"  appAutofocus formControlName="albumCaption" maxlength="100" >
-            </div>
-            <div class="alert" *ngIf="!rForm.controls['albumCaption'].valid && rForm.controls['albumCaption'].touched">{{ translations.albumCaptionAlert }}</div>
+    <h2> {{headerTxt}}</h2>
 
-            <div class="login-row">
-                <input class="login-input" onlyNumericInteger matInput type="text" placeholder="שנת הוצאה"  formControlName="albumIssueYear"  maxlength="4" >
-             </div>
-             <div class="alert" *ngIf="!rForm.controls['albumIssueYear'].valid && rForm.controls['albumIssueYear'].touched">{{ translations.albumeIssuYearAlert }}</div>
-
-            <div class="login-row">
-                <input class="login-input"  matInput type="text" placeholder="שם אומן"  formControlName="albumNameArtist" maxlength="100" >
-            </div>
-            <div class="alert"  *ngIf="!rForm.controls['albumNameArtist'].valid && rForm.controls['albumNameArtist'].touched">{{ translations.albumNameArtistAlert }}</div>
-
-            <div class="login-row">
-                <mat-form-field appearance="fill" dir="rtl" class='cbo-filter' >
-                    <mat-label>{{translations.chooseAlbumGenres}}</mat-label>
-                    <mat-select  (selectionChange)="onGenresChange($event)" formControlName="albumGenres">
-                        <mat-option *ngFor="let g of genresArr" [value]="g.Id">
-                        {{g.Name}}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
-            </div>
-            <div class="upload">
-                <!-- <mat-form-field appearance="fill" dir="rtl" class='cbo-filter'>
-
-                    <div class="myfilebrowser">
-                
-                   
-                        <input class="login-input" matInput formControlName="albumPicture" readonly name="memberContactNo" />
-                
-                        
-                    <input type="file"   #UploadFileInput id="fileUpload" (change)="fileChangeEvent($event)" name="fileUpload"
-                        multiple="multiple" accept="image/*" />
-                
-                    </div>
-                
-                </mat-form-field> -->
-            <!-- ***************************************** -->
+    <div class="form-container">  
+ 
+        <form [formGroup]="rForm" class="tbl-container" >
             
-                <ngx-file-drop dropZoneLabel="Drop files here" 
-                    (onFileDrop)="dropped($event)" 
-                    (onFileOver)="fileOver($event)" 
-                    (onFileLeave)="fileLeave($event)">
-                    <ng-template ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
-                       <div class="drop-aria">Drop files here</div> 
-                      <button type="button" (click)="openFileSelector()">Browse Files</button>
-                    </ng-template>
-                </ngx-file-drop>
-                <div class="upload-table">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>שם קובץ</th>
-                            </tr>
-                        </thead>
-                        <tbody class="upload-name-style">
-                            <tr *ngFor="let item of files; let i=index">
-                                <td><strong>{{ item.relativePath }}</strong></td>
-                            </tr>
-                        </tbody>
-                    </table>
+            <mat-card-content>
+
+                <h1 class='login-caption'>{{header2Txt}}</h1>
+                <!-- *********TODO remove*************** -->
+                <div class="row-flex">
+                    <input class="action-input"  matInput type="text" placeholder="{{translations.AlbumCaption}}"  appAutofocus formControlName="albumCaption" maxlength="100" >
                 </div>
+                <div class="alert" *ngIf="!rForm.controls['albumCaption'].valid && rForm.controls['albumCaption'].touched">{{ translations.AlbumCaptionAlert }}</div>
+                <!-- ************************ -->
+    
+                <mat-form-field class="row-flex form-field" >
+                    <mat-label> {{translations.AlbumCaption}}  </mat-label>
+                    <input  class="action-input" matInput  type="text" placeholder="{{translations.AlbumCaption}}"
+                    formControlName="albumCaption"  appAutofocus  maxlength="100" >
+                    <mat-error *ngIf="(rForm.controls['albumCaption'].touched || submitted) && rForm.controls['albumCaption'].errors?.required">
+                        {{ translations.AlbumCaptionAlert }}
+                    </mat-error>
+                </mat-form-field>
 
-             <!-- *****************************************            -->
-            </div>
-            <!-- ################################ -->
-            <!-- <dl>
-                <dt>
-                    <label asp-for="FileUpload.FormFile"></label>
-                </dt>
-                <dd>
-                    <input asp-for="FileUpload.FormFile" type="file">
-                    <span asp-validation-for="FileUpload.FormFile"></span>
-                </dd>
-            </dl>
-            <input asp-page-handler="Upload" class="btn" type="submit" value="Upload" />             -->
+                <mat-form-field class="row-flex form-field" >
+                    <mat-label> {{translations.AlbumIssueYear}}  </mat-label>
+                    <input  class="action-input" onlyNumericInteger matInput  type="text" placeholder="{{translations.AlbumIssueYear}}"
+                    formControlName="albumIssueYear"  appAutofocus  maxlength="4" />
+                    <mat-error *ngIf="(rForm.controls['albumIssueYear'].touched || submitted) && rForm.controls['albumIssueYear'].errors?.required">
+                        {{ translations.AlbumeIssuYearAlert1 }}
+                    </mat-error>            
+                    <mat-error *ngIf="(rForm.controls['albumIssueYear'].touched || submitted) && (rForm.controls['albumIssueYear'].errors?.min || rForm.controls['albumIssueYear'].errors?.max)">
+                        {{ translations.AlbumeIssuYearAlert2 }}
+                    </mat-error>
+                </mat-form-field>  
 
-            <!-- ################################ -->  
-            <div class="dropzone">
-                
-
-            </div>
+                <mat-form-field class="row-flex form-field" >
+                    <mat-label> {{translations.AlbumNameArtist}}</mat-label>
+                    <input  class="action-input" matInput  type="text" placeholder="{{translations.AlbumNameArtist}}"
+                    formControlName="albumNameArtist"  appAutofocus  maxlength="100" >
+                    <mat-error *ngIf="(rForm.controls['albumNameArtist'].touched || submitted) && rForm.controls['albumNameArtist'].errors?.required">
+                        {{ translations.AlbumNameArtistAlert }}
+                    </mat-error>
+                </mat-form-field>   
             
-             <!-- ################################ --> 
-            <!-- [disabled]="!rForm.valid" -->
-            <div class="login-row"><button (click)="sendNewAlbum()">התחברות</button></div>
-        </div>
-    </form> 
+                <div class="row-flex">
+                    <mat-form-field appearance="fill" dir="rtl" class='cbo-filter' >
+                        <mat-label>{{translations.ChooseAlbumGenres}}</mat-label>
+                        <mat-select  (selectionChange)="onGenresChange($event)" formControlName="albumGenres">
+                            <mat-option *ngFor="let g of genresArr" [value]="g.Id">
+                            {{g.Name}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-error *ngIf="(rForm.controls['albumGenres'].touched || submitted) && rForm.controls['albumGenres'].errors?.required">
+                        {{ translations.ChooseAlbumGenrestAlert }}
+                    </mat-error>
+                </div>
+                <div class="upload">
+                    <ngx-file-drop dropZoneLabel="Drop files here" 
+                        (onFileDrop)="dropped($event)" 
+                        (onFileOver)="fileOver($event)" 
+                        (onFileLeave)="fileLeave($event)">
+                        <ng-template ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
+                            <div class="drop-aria">{{translations.DragAndDrop}}</div> 
+                            <button  type="button" mat-stroked-button  (click)="openFileSelector()"> {{ translations.ChooseFile }}</button>
+                        </ng-template>
+                    </ngx-file-drop>
+                    <div class="upload-table">
+                        <table class="table">
+                            <!-- <thead>
+                                <tr>
+                                    <th colspan='2'>שם קובץ</th>
+                                </tr>
+                            </thead> -->
+                            <tbody class="upload-name-style">
+                                <tr *ngFor="let item of files; let i=index">
+                                    <td>
+                                        <mat-form-field class="row-flex form-field" >
+                                            <mat-label> {{translations.PictureName}}  </mat-label>
+                                            <input  class="action-input" matInput  type="text" placeholder="{{translations.PictureName}}"
+                                            formControlName="pictureName"  appAutofocus  maxlength="100" >
+                                            <mat-error *ngIf="(rForm.controls['pictureName'].touched || submitted) && rForm.controls['pictureName'].errors?.required">
+                                                {{ translations.PictureNameAlert }}
+                                            </mat-error>
+                                        </mat-form-field>
+                                        
 
+                                    </td>
+                                    <td>
+                                        <mat-form-field class="row-flex form-field" >
+                                            <mat-label> {{translations.PictureType}}  </mat-label>
+                                            <input  class="action-input" matInput  type="text" placeholder="{{translations.PictureType}}"
+                                            value="{{ getFileType(item.relativePath) }}"
+                                            appAutofocus  maxlength="100" readonly >
+                                            <!-- <mat-error *ngIf="(rForm.controls['pictureName'].touched || submitted) && rForm.controls['pictureName'].errors?.required">
+                                                {{ translations.PictureNameAlert }}
+                                            </mat-error> -->
+                                        </mat-form-field>
+                                        <!-- <strong>{{ getFileType(item.relativePath) }}</strong> -->
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <input type="hidden" formControlName="albumPicture" />
+                </div>  <!-- class="upload"   -->      
+
+            </mat-card-content>
+            <mat-card-content *ngIf="albumDetails">
+                <mat-card class="example-card">
+                    <mat-card-header>
+                        <mat-card-title>{{albumDetails?.Caption}}</mat-card-title>
+                        <div mat-card-avatar class="example-header-image"></div>
+                    </mat-card-header>
+                     <img mat-card-image src="{{albumDetails.Picture.Path}}" alt="Photo of a {{albumDetails.Caption}}">
+                    <mat-card-content>
+                        <div class="album-bottom-row"><i>{{albumDetails.NameArtist}}</i></div>
+                        <div class="album-bottom-row">{{translations.AlbumIssueYear}}: {{albumDetails.IssueYear}}</div>
+                        <div class="album-bottom-row">{{translations.Genres}}: {{albumDetails.GenresDesc}}</div>
+                    </mat-card-content>
+                </mat-card>
+            </mat-card-content>
+            
+        <mat-card-actions>
+            <div *ngIf="action == AlbumActions.Add" class="row-flex"><button  type="button" mat-stroked-button (click)="sendNewAlbum()">{{translations.Send}}</button></div>
+            <div *ngIf="action == AlbumActions.Edit" class="row-flex"><button  type="button" mat-stroked-button (click)="updateAlbum()">{{translations.HeaderEditAlbum}}</button></div>
+            <div *ngIf="action == AlbumActions.Delete"class="row-flex"><button  type="button" mat-stroked-button (click)="deleteAlbum()">{{translations.HeaderDeleteAlbum}}</button></div>
+
+        </mat-card-actions>    
+        </form> 
+ </div>    
+
+
+    </mat-card>
 
 </div>

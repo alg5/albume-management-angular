@@ -10,12 +10,13 @@ import { AlbumActionsComponent } from './components/album-actions/album-actions.
 
 
 const routes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: 'login' },
+ 
   {path: 'login', component: LoginPageComponent},
   // { path: 'register', component: RegisterComponent }
    {path: 'albums', component: AlbumListComponent},
    {path: 'actions', component: AlbumActionsComponent},
-//  { path: '', redirectTo: 'LoginPageComponent', pathMatch: 'full' }
+ { path: '', pathMatch: 'full', redirectTo: 'login' },
+ //  { path: '', redirectTo: 'LoginPageComponent', pathMatch: 'full' }
 ];
 
 @NgModule({

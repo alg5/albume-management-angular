@@ -384,3 +384,16 @@ ul li{
   -ms-transform: rotate(-3deg);
   transform: rotate(-3deg); */
 }
+
+input:read-only
+, .mat-select-value:disabled
+ {
+  background-color: #F3F3D5!important;
+}
+/* ::ng-deep .mat-select-disabled .mat-select-value
+, ::ng-deep.mat-select-value
+
+{
+  background-color: #F3F3D5!important;
+} */
+

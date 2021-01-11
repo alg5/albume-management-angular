@@ -20,16 +20,23 @@
                 <mat-form-field class="row-flex form-field" >
                     <mat-label> {{translations.AlbumCaption}}  </mat-label>
                     <input  class="action-input" matInput  type="text" placeholder="{{translations.AlbumCaption}}"
-                    formControlName="albumCaption"  appAutofocus  maxlength="100" >
-                    <mat-error *ngIf="(rForm.controls['albumCaption'].touched || submitted) && rForm.controls['albumCaption'].errors?.required">
-                        {{ translations.AlbumCaptionAlert }}
+                    formControlName="albumCaption"  appAutofocus  maxlength="100" 
+                    [readonly]="action == AlbumActions.Delete"           
+                    >
+                    <mat-error *ngIf="(rForm.controls['albumCaption'].touched || submitted) && rForm.controls['albumCaption'].errors">
+                        {{ getAlbumCaptionAlert()}}
                     </mat-error>
+                    <!-- <mat-error *ngIf="rForm.controls['albumCaption'].errors?.albumCaptionExist">
+                        Caption is already taken.
+                    </mat-error> -->
                 </mat-form-field>
 
                 <mat-form-field class="row-flex form-field" >
                     <mat-label> {{translations.AlbumIssueYear}}  </mat-label>
                     <input  class="action-input" onlyNumericInteger matInput  type="text" placeholder="{{translations.AlbumIssueYear}}"
-                    formControlName="albumIssueYear"  appAutofocus  maxlength="4" />
+                    formControlName="albumIssueYear"  appAutofocus  maxlength="4" 
+                    [readonly]="action == AlbumActions.Delete"
+                    />
                     <mat-error *ngIf="(rForm.controls['albumIssueYear'].touched || submitted) && rForm.controls['albumIssueYear'].errors?.required">
                         {{ translations.AlbumeIssuYearAlert1 }}
                     </mat-error>            
@@ -41,16 +48,18 @@
                 <mat-form-field class="row-flex form-field" >
                     <mat-label> {{translations.AlbumNameArtist}}</mat-label>
                     <input  class="action-input" matInput  type="text" placeholder="{{translations.AlbumNameArtist}}"
-                    formControlName="albumNameArtist"  appAutofocus  maxlength="100" >
+                    formControlName="albumNameArtist"  appAutofocus  maxlength="100" 
+                    [readonly]="action == AlbumActions.Delete"
+                    />
                     <mat-error *ngIf="(rForm.controls['albumNameArtist'].touched || submitted) && rForm.controls['albumNameArtist'].errors?.required">
                         {{ translations.AlbumNameArtistAlert }}
                     </mat-error>
                 </mat-form-field>   
             
-                <div class="row-flex">
+                <div class="row-flex" *ngIf="action != AlbumActions.Delete">
                     <mat-form-field appearance="fill" dir="rtl" class='cbo-filter' >
                         <mat-label>{{translations.ChooseAlbumGenres}}</mat-label>
-                        <mat-select  (selectionChange)="onGenresChange($event)" formControlName="albumGenres">
+                        <mat-select  (selectionChange)="onGenresChange($event)" formControlName="albumGenres" [disabled]="action == AlbumActions.Delete">
                             <mat-option *ngFor="let g of genresArr" [value]="g.Id">
                             {{g.Name}}
                             </mat-option>
@@ -60,16 +69,26 @@
                         {{ translations.ChooseAlbumGenrestAlert }}
                     </mat-error>
                 </div>
+                <mat-form-field  *ngIf="action == AlbumActions.Delete" class="row-flex form-field" >
+                    <mat-label> {{translations.ChooseAlbumGenres}}</mat-label>
+                    <input  class="action-input" matInput  type="text" placeholder="{{translations.ChooseAlbumGenres}}"
+                    formControlName="albumGenres"  appAutofocus  maxlength="100" 
+                    [readonly]="action == AlbumActions.Delete"
+                    />
+                </mat-form-field>   
+
                 <div class="upload">
-                    <ngx-file-drop dropZoneLabel="Drop files here" 
-                        (onFileDrop)="dropped($event)" 
-                        (onFileOver)="fileOver($event)" 
-                        (onFileLeave)="fileLeave($event)">
-                        <ng-template ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
-                            <div class="drop-aria">{{translations.DragAndDrop}}</div> 
-                            <button  type="button" mat-stroked-button  (click)="openFileSelector()"> {{ translations.ChooseFile }}</button>
-                        </ng-template>
-                    </ngx-file-drop>
+                    <div *ngIf="action != AlbumActions.Delete">
+                        <ngx-file-drop dropZoneLabel="Drop files here" 
+                            (onFileDrop)="dropped($event)" 
+                            (onFileOver)="fileOver($event)" 
+                            (onFileLeave)="fileLeave($event)">
+                            <ng-template ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
+                                <div class="drop-aria">{{translations.DragAndDrop}}</div> 
+                                <button  type="button" mat-stroked-button  (click)="openFileSelector()"> {{ translations.ChooseFile }}</button>
+                            </ng-template>
+                        </ngx-file-drop>
+                    </div>
                     <div class="upload-table">
                         <table class="table">
                             <!-- <thead>
@@ -78,32 +97,60 @@
                                 </tr>
                             </thead> -->
                             <tbody class="upload-name-style">
-                                <tr *ngFor="let item of files; let i=index">
-                                    <td>
-                                        <mat-form-field class="row-flex form-field" >
-                                            <mat-label> {{translations.PictureName}}  </mat-label>
-                                            <input  class="action-input" matInput  type="text" placeholder="{{translations.PictureName}}"
-                                            formControlName="pictureName"  appAutofocus  maxlength="100" >
-                                            <mat-error *ngIf="(rForm.controls['pictureName'].touched || submitted) && rForm.controls['pictureName'].errors?.required">
-                                                {{ translations.PictureNameAlert }}
-                                            </mat-error>
-                                        </mat-form-field>
-                                        
+                                <ng-container  *ngIf="action != AlbumActions.Delete">
+                                    <tr *ngFor="let item of files; let i=index">
+                                    
+                                        <td>
+                                            <mat-form-field class="row-flex form-field" >
+                                                <mat-label> {{translations.PictureName}}  </mat-label>
+                                                <input  class="action-input" matInput  type="text" placeholder="{{translations.PictureName}}"
+                                                formControlName="pictureName"  appAutofocus  maxlength="100" 
+                                                [readonly]="action == AlbumActions.Delete"
+                                                />
+                                                <mat-error *ngIf="(rForm.controls['pictureName'].touched || submitted) && rForm.controls['pictureName'].errors?.required">
+                                                    {{ translations.PictureNameAlert }}
+                                                </mat-error>
+                                            </mat-form-field>
+                                            
 
-                                    </td>
-                                    <td>
-                                        <mat-form-field class="row-flex form-field" >
-                                            <mat-label> {{translations.PictureType}}  </mat-label>
-                                            <input  class="action-input" matInput  type="text" placeholder="{{translations.PictureType}}"
-                                            value="{{ getFileType(item.relativePath) }}"
-                                            appAutofocus  maxlength="100" readonly >
-                                            <!-- <mat-error *ngIf="(rForm.controls['pictureName'].touched || submitted) && rForm.controls['pictureName'].errors?.required">
-                                                {{ translations.PictureNameAlert }}
-                                            </mat-error> -->
-                                        </mat-form-field>
-                                        <!-- <strong>{{ getFileType(item.relativePath) }}</strong> -->
-                                    </td>
-                                </tr>
+                                        </td>
+                                        <td>
+                                            <mat-form-field class="row-flex form-field" >
+                                                <mat-label> {{translations.PictureType}}  </mat-label>
+                                                <input  class="action-input" matInput  type="text" placeholder="{{translations.PictureType}}"
+                                                value="{{ getFileType(item.relativePath) }}"
+                                                appAutofocus  maxlength="100" readonly >
+                                                <!-- <mat-error *ngIf="(rForm.controls['pictureName'].touched || submitted) && rForm.controls['pictureName'].errors?.required">
+                                                    {{ translations.PictureNameAlert }}
+                                                </mat-error> -->
+                                            </mat-form-field>
+                                            <!-- <strong>{{ getFileType(item.relativePath) }}</strong> -->
+                                        </td>
+                                    </tr>
+                                </ng-container>
+                                <ng-container  *ngIf="action == AlbumActions.Delete">
+                                    <tr>
+                                        <td>
+                                            <mat-form-field class="row-flex form-field" >
+                                                <mat-label> {{translations.PictureName}}  </mat-label>
+                                                <input  class="action-input" matInput  type="text" placeholder="{{translations.PictureName}}"
+                                                formControlName="pictureName"  appAutofocus  maxlength="100" 
+                                                [readonly]="action == AlbumActions.Delete"
+                                                />
+                                            </mat-form-field>
+                                            
+
+                                        </td>
+                                        <td>
+                                            <mat-form-field class="row-flex form-field" >
+                                                <mat-label> {{translations.PictureType}}  </mat-label>
+                                                <input  class="action-input" matInput  type="text" placeholder="{{translations.PictureType}}"
+                                                value="{{ getFileType(albumDetails?.Picture.Path) }}"
+                                                appAutofocus  maxlength="100" readonly >
+                                            </mat-form-field>
+                                        </td>
+                                    </tr>
+                                </ng-container>
                             </tbody>
                         </table>
                     </div>

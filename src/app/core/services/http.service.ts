@@ -12,7 +12,7 @@ import { AlbumModel, UserModel } from '../../classes/AlbumModels';
 export class HttpService {
 
   subjectPaperDetails: Subject<SubjectPaperDetails> =  new Subject<SubjectPaperDetails>();
-  SubjectTestValid: Subject<any> =  new Subject<any>();
+  // SubjectAlbumValid: Subject<any> =  new Subject<any>();
 
   constructor(private http: HttpClient) { }
 

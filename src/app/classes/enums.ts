@@ -42,3 +42,9 @@ export const paths = {
   loader: "loader",
   https: "https"
 };
+export enum AlertTypeEnum {
+  Alert ,
+  Info,
+  Confirm,
+  Error,
+}

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import { AlbumActions, LOCAL_STORAGE_KEY } from 'src/app/classes/enums';
+import { AlbumService } from 'src/app/core/services/album.service';
 import { HttpService } from 'src/app/core/services/http.service';
 
 @Component({
@@ -10,7 +11,7 @@ import { HttpService } from 'src/app/core/services/http.service';
 })
 export class MenuCornerComponent implements OnInit {
 
-  constructor(private router: Router, private httpService: HttpService) { }
+  constructor(private router: Router, private albumService: AlbumService) { }
 
   ngOnInit(): void {
   }
@@ -29,7 +30,7 @@ export class MenuCornerComponent implements OnInit {
   }
   savetest()
   {
-    this.httpService.SubjectTestValid.next(null);
+    this.albumService.SubjectAlbumValid.next(null);
   }
 
 }

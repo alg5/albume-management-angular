@@ -1,0 +1,38 @@
+
+<!-- <div class="modal-header">
+    <h4 class="modal-title">{{ title }}</h4>
+      <button type="button" class="close" aria-label="Close" (click)="dismiss()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+</div>
+<div class="modal-body">
+    {{ message }}
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-danger" (click)="decline()">{{ btnCancelText }}</button>
+    <button type="button" class="btn btn-primary" (click)="accept()">{{ btnOkText }}</button>
+</div> -->
+
+
+
+  <!-- <div class="modal-footer">
+    <button type="button" class="btn btn-outline-secondary" (click)="modal.dismiss('cancel click')">Cancel</button>
+    <button type="button" class="btn btn-danger" (click)="modal.close('Ok click')">Ok</button>
+  </div> -->
+  <h2 mat-dialog-title>{{title}}</h2>
+  <div mat-dialog-content>
+    {{message}}
+   </div>
+   <div mat-dialog-actions>
+     <div *ngIf="false">
+      <button mat-button class="mat-raised-button" (click)="cancel()">{{btnCancelText}}</button>
+      <button mat-button (click)="confirm()" cdkFocusInitial>{{btnOkText}}</button>
+     </div>
+     <div *ngIf="type!=true">
+      <button mat-button (click)="cancel()" >{{btnOkText}}qwerty</button>
+       
+     </div>
+   </div>
+   <!-- [mat-dialog-close]="true" -->
+   <!-- <button class="mat-raised-button"(click)="close()">{{txtClose}}</button>
+   <button class="mat-raised-button mat-primary"(click)="save()">{{txtSave}}</button> -->

@@ -6,6 +6,7 @@ import { ListCubePaperDetailsComponent } from './components/list-cube-paper-deta
 import { LoginPageComponent } from './components/login-page/login-page.component';
 import { AlbumListComponent } from './components/album-list/album-list.component';
 import { AlbumActionsComponent } from './components/album-actions/album-actions.component';
+import { PaperDetailsComponent } from './components/paper-details/paper-details.component';
 
 
 
@@ -15,6 +16,9 @@ const routes: Routes = [
   // { path: 'register', component: RegisterComponent }
    {path: 'albums', component: AlbumListComponent},
    {path: 'actions', component: AlbumActionsComponent},
+ 
+   {path: 'papers', component: SecuritiesComponent},
+  //  {path: 'paper-details', component: PaperDetailsComponent},   
  { path: '', pathMatch: 'full', redirectTo: 'login' },
  //  { path: '', redirectTo: 'LoginPageComponent', pathMatch: 'full' }
 ];

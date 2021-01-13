@@ -32,5 +32,9 @@ export class MenuCornerComponent implements OnInit {
   {
     this.albumService.SubjectAlbumValid.next(null);
   }
+  exportToExcel()
+  {
+    this.albumService.SubjectExportAlbumToExcel.next(null);
+  }
 
 }

@@ -24,11 +24,11 @@
     {{message}}
    </div>
    <div mat-dialog-actions>
-     <div *ngIf="false">
+     <div *ngIf="type==AlertTypeEnum.Confirm">
       <button mat-button class="mat-raised-button" (click)="cancel()">{{btnCancelText}}</button>
       <button mat-button (click)="confirm()" cdkFocusInitial>{{btnOkText}}</button>
      </div>
-     <div *ngIf="type!=true">
+     <div *ngIf="type!=AlertTypeEnum.Confirm">
       <button mat-button (click)="cancel()" >{{btnOkText}}qwerty</button>
        
      </div>

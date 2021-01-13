@@ -23,8 +23,9 @@ import { AlbumActionsComponent } from '../components/album-actions/album-actions
 import { NgxFileDropModule } from 'ngx-file-drop';
 import { OnlyNumericIntegerDirective } from '../directives/only-numeric-integer.directive';
 import { FieldErrorDisplayComponent } from '../components/field-error-display/field-error-display.component';
-
+// import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MaterialModule } from './material.module';
+
 
 @NgModule({
   declarations: [ SecuritiesComponent, LiveSearchComponent, MenuCornerComponent, OnlyHebrewDirective
@@ -40,7 +41,8 @@ import { MaterialModule } from './material.module';
     BrowserModule,
     ReactiveFormsModule,
     NgxPaginationModule,
-    NgxFileDropModule
+    NgxFileDropModule,
+    // FontAwesomeModule
   ],
   exports: [
     FormsModule,

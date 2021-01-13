@@ -61,6 +61,10 @@ export class AlbumListComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+    this.albumService.SubjectExportAlbumToExcel.subscribe((data)=>{
+      this.exportToExcel();
+      })
  
       const now = Date();
       this.lastDate = this.datePipe.transform(now, 'dd/MM/yyyy');
@@ -243,6 +247,24 @@ export class AlbumListComponent implements OnInit {
   }
   navigateAction(action: AlbumActions, albumId:number){
     this.router.navigate(['/actions'], { queryParams: { action: action, id:albumId } });
+  }
+
+  exportToExcel(){
+    // albumListFiltered
+    console.log("exportToExcel");
+    this.albumService.albumExportToExcel( this.albumListFiltered)
+      .subscribe(
+              data => {
+                  if(!data) {
+                    //TODO
+                    return;
+                  }
+                  // this.fillData(data);
+               },
+              error => {
+                //TODO
+                  // this.loading = false;
+    });
   }
 
 

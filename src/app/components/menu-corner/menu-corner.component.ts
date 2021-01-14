@@ -3,6 +3,7 @@ import {Router} from '@angular/router';
 import { AlbumActions, LOCAL_STORAGE_KEY } from 'src/app/classes/enums';
 import { AlbumService } from 'src/app/core/services/album.service';
 import { HttpService } from 'src/app/core/services/http.service';
+import { faCoffee } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-menu-corner',
@@ -10,7 +11,7 @@ import { HttpService } from 'src/app/core/services/http.service';
   styleUrls: ['./menu-corner.component.css']
 })
 export class MenuCornerComponent implements OnInit {
-
+  faCoffee = faCoffee;
   constructor(private router: Router, private albumService: AlbumService) { }
 
   ngOnInit(): void {

@@ -5,6 +5,9 @@ import { HttpService } from 'src/app/core/services/http.service';
 import { AlbumModel, NameId, NameIdString, UserModel } from 'src/app/classes/AlbumModels';
 import { AlbumActions, LOCAL_STORAGE_KEY, SortEnum, TOTAL, TOTAL_TEXT, WITHOUT_SORTING } from 'src/app/classes/enums';
 import { AlbumService } from 'src/app/core/services/album.service';
+import 'rxjs/Rx' ;
+
+
 
 @Component({
   selector: 'app-album-list',
@@ -259,7 +262,7 @@ export class AlbumListComponent implements OnInit {
                     //TODO
                     return;
                   }
-                  // this.fillData(data);
+                  this.downloadFile(data);
                },
               error => {
                 //TODO
@@ -267,9 +270,9 @@ export class AlbumListComponent implements OnInit {
     });
   }
 
-
-
-   
-  
-
+  downloadFile(data: Blob) {
+     // const blob = new Blob([data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+    const url= window.URL.createObjectURL(data);
+    window.open(url);
+  }
 }

@@ -132,13 +132,6 @@ export class AlbumService {
 
     albumExportToExcel(albumList: AlbumModel[] ): Observable<any>  {
     const res = "http://localhost:5000/Album/AlbumExportToExcel";
-    return this.http.post(res,albumList).pipe(map(data => {
-      console.log("albumExportToExcel: ", data);
-      return data;
-    }),
-      catchError(err => {
-        console.log("err: ", err);
-        return throwError(err);
-      }))
+    return this.http.post(res,albumList, { responseType: 'blob'});
   };
 }

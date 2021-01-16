@@ -26,6 +26,9 @@
     width:30px;
     height:30px;
 }
-
+.export-excel{
+    font-size:18px;
+    margin-right: -10px;
+}
 /* border-top: 100px solid red;
 border-left: 100px solid transpare */

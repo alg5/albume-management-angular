@@ -46,3 +46,6 @@ app-album-actions .ngx-file-drop__drop-zone
 {
     height:60px !important;
 }
+
+.fa-file-excel:before {
+    content: "\f1c3"; }

@@ -1,41 +1,92 @@
 .container {
-    /* width: 600px; */
-    margin: 50px auto;
-    padding: 40px;
     direction: rtl;
-    padding-top: 0px;/* TODO */
     text-align: right;
+    background: #2cd5c4; 
+    
+}
+
+.container.abonements {
+  padding-bottom: 40px;
+}
+
+.top {
+  border-top: 2px solid white;
+  border-bottom: 2px solid white;
+  align-items: center;
+  padding-top: 10px;
+}
+
+.logo {
+  color: white;
+  font-size: 36px;
+  font-weight: 500;
+  height: 32px;
+  text-align: left;
+}
+
+.visit-data {
+  display: flex;
+  justify-content: space-between;
+}
+
+.date-time {
+  direction: rtl;
 }
 
 .container h2 {
     text-align: right;
-    border-bottom: 4px solid #99ccff;
+    font-size: 16px;
+    margin: 0;
+    color: white;
+    /* border-bottom: 4px solid #2cd5c4; */
 }
 
+
+/* 
 .container .row{
   display: flex;
   padding: 0 15px;
   
+} */
+.title h2 {
+  font-size: 24px;
+  font-weight: bold;
+  color: white;
 }
+
 .header-row{
-    /* border:1px solid red; */
-    direction: ltr;
-    float: left;
     font-size: 12px;
+    color: white;
 }
+
 .tbl-container {
-    background: #99ccff; 
-    padding: 20px;
+    background: white; 
+    border:1px solid white;
 }
+
 table {
     width: 100%;
- 
+    border-spacing: 1px;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+  background: white;
 }
 
 th {
     text-align: right !important;
     font-weight: bold;
     font-size: 14px;
+    border-top: none;
+    background: #e7e5e5;
+}
+
+td{
+  background: #f8f8f8;
+}
+
+td:hover {
+  background: #f4f4f4;
 }
 
 td, th {
@@ -43,24 +94,34 @@ td, th {
 }
 /* ************Bootstrap***************** */
 .table-material{
-    display:none;
-  }
-  .bs-table .table {
+  display:none;
+}
+.bs-table .table {
+  width: 100%;
+  background-color: white;
+
+}
+/* .bs-table table thead th {
+  border: 1px solid blueviolet;
+  padding: 14px 10px !important;
+} */
+.bs-table td:not(.details), .bs-table  th{
+    padding:10px !important;
+    text-align: right;
+    cursor:default;
+}
+.example-element-detail {
+  overflow: hidden;
+  display: flex;
+  /* background-color: aliceblue; */
+  background-color: #ffffff;
+}
+
+
+app-packages-customer {
     width: 100%;
-    background-color: white;
-  
-  }
-  /* .bs-table table thead th {
-    border: 1px solid blueviolet;
-    padding: 14px 10px !important;
-  } */
-  .bs-table td:not(.details), .bs-table  th{
-      padding:10px !important;
-      text-align: right;
-  }
-  .example-element-detail {
-    overflow: hidden;
-    display: flex;
-    /* background-color: aliceblue; */
-    background-color:cornsilk;
-  }
+}
+
+.details  {
+  background: #ffffff !important;
+}

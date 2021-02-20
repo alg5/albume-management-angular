@@ -48,4 +48,5 @@ app-album-actions .ngx-file-drop__drop-zone
 }
 
 .fa-file-excel:before {
-    content: "\f1c3"; }
+    content: "\f1c3";
+}

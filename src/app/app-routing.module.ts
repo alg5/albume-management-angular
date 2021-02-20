@@ -19,11 +19,9 @@ const routes: Routes = [
    {path: 'actions', component: AlbumActionsComponent},
  
    {path: 'papers', component: SecuritiesComponent},
-
-
-  //  {path: 'paper-details', component: PaperDetailsComponent},   
- { path: '', pathMatch: 'full', redirectTo: 'login' },
- 
+  
+//  { path: '', pathMatch: 'full', redirectTo: 'login' }, temp
+ { path: '', pathMatch: 'full', redirectTo: 'customer-pr' },
   { path: 'customer-pr', loadChildren: () => import('./customer-pr/customer-pr.module').then(m => m.CustomerPrModule) },
  //  { path: '', redirectTo: 'LoginPageComponent', pathMatch: 'full' }
 ];

@@ -1,0 +1,14 @@
+.row {
+    margin-right: 0;
+    margin-left: 0;
+    padding: 4px 0;
+    direction: rtl;
+}
+
+th {
+    border-bottom: none;
+}
+
+th, td {
+    background: white;
+}

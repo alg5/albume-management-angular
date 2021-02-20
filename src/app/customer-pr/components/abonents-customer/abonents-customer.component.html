@@ -1,32 +1,42 @@
 <div class="container">
-    <h2> שלום, {{username}} <span class="header-row">{{lastDate}} | {{lastTime}}&nbsp;:{{translations.LastVisit}}</span></h2>
-    <div *ngIf="user?.abonements">
-        <div class="row">רשימת מנויים</div>
-        <div class="tbl-container"> 
-            <!-- <div class="row">Bootstrap</div> -->
-            <table class="table table-striped table-hover bs-table">
-                <thead>
-                    <tr >
-                      <th scope="col">{{translations.ColAbonementName}}</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <ng-container *ngFor="let abonement of user.abonements">
-                        <tr (click)="expandedElement = expandedElement === abonement ? null : abonement;onExpanded(abonement.id)">
-                            <td>{{ abonement.name}}</td>
-                        </tr>
-                        <tr >
-                            <td  class='details' >
-                             <div class="example-element-detail"
-                                       [@detailExpand]="abonement == expandedElement ? 'expanded' : 'collapsed'">
-                                       <app-packages-customer [packages]="abonement.packages"></app-packages-customer>
-                              </div>
-                            </td>
-                          </tr>
-                    </ng-container>
-                  </tbody>
-            </table>
-            <!-- <div class="row">Angular material</div> -->
-        </div>
+  <div class="visit-data">
+    <div class="date-time">
+      <span class="header-row">{{translations.LastVisit}}:&nbsp; {{lastDate}} | {{lastTime}}</span>
     </div>
+  </div>
+  <div class="top">
+    <div class="logo">Partner</div>
+  </div>
+</div>
+<div class="container abonements">
+  <h2> שם לקוח: {{username}} </h2>
+  <div *ngIf="user?.abonements">
+      <div class="title"><h2>מנויים</h2></div>
+      <div class="tbl-container"> 
+          <!-- <div class="row">Bootstrap</div> -->
+          <table class="table table-striped table-hover bs-table">
+              <thead>
+                  <tr >
+                    <th scope="col">{{translations.ColAbonementName}}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <ng-container *ngFor="let abonement of user.abonements">
+                      <tr  (click)="expandedElement = expandedElement === abonement ? null : abonement;onExpanded(abonement.id)">
+                          <td><span [innerHTML]="expandedElement === abonement ? '-' : '+'"></span> {{ abonement.name}}</td>
+                      </tr>
+                      <tr >
+                          <td  class='details' >
+                            <div class="example-element-detail"
+                                      [@detailExpand]="abonement == expandedElement ? 'expanded' : 'collapsed'">
+                                      <app-packages-customer [packages]="abonement.packages"></app-packages-customer>
+                            </div>
+                          </td>
+                        </tr>
+                  </ng-container>
+                </tbody>
+          </table>
+          <!-- <div class="row">Angular material</div> -->
+      </div>
+  </div>
 </div>

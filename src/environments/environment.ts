@@ -5,6 +5,7 @@
 export const environment = {
   production: false,
   apiUrl: 'http://localhost:5000/',
+  apiUrl2: 'http://localhost:5001/',
   title: 'Albums',
 };
 

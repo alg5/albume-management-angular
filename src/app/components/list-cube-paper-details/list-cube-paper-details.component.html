@@ -4,10 +4,7 @@
         <div class="cube-wrap">
             <div class="cube" (click)="expandedElement = expandedElement === paper ? null : paper;showDetails(paper.Id, ShapePaperDetals.Cube)">{{paper.Name}}</div>
             <div class="paper-details" [@detailExpand]="paper == expandedElement ? 'expanded' : 'collapsed'">
-                <!-- <div *ngIf="expandedElement === paper"></div> -->
-                    <app-paper-details [paperId]="paper.Id" [shape]="ShapePaperDetals.Cube"></app-paper-details>
-                
-                
+                <app-paper-details [paperId]="paper.Id" [shape]="ShapePaperDetals.Cube"></app-paper-details>
             </div>
         </div>
     </ng-container>

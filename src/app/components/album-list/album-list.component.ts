@@ -6,7 +6,8 @@ import { AlbumModel, NameId, NameIdString, UserModel } from 'src/app/classes/Alb
 import { AlbumActions, LOCAL_STORAGE_KEY, SortEnum, TOTAL, TOTAL_TEXT, WITHOUT_SORTING } from 'src/app/classes/enums';
 import { AlbumService } from 'src/app/core/services/album.service';
 import 'rxjs/Rx' ;
-
+import * as FileSaver from 'file-saver';
+import * as XLSX from 'xlsx';
 
 
 @Component({
@@ -271,8 +272,33 @@ export class AlbumListComponent implements OnInit {
   }
 
   downloadFile(data: Blob) {
-     // const blob = new Blob([data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
-    const url= window.URL.createObjectURL(data);
-    window.open(url);
+    const fileName = "Album-list";
+    const EXCEL_EXTENSION = "xlsx";
+     const blob = new Blob([data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+     const workBook = XLSX.read(blob, { type: 'binary' });
+     FileSaver.saveAs(data, fileName + '_export_' + new Date().getHours() + ':' + new Date().getMinutes() + ':' + new Date().getSeconds() + '.' + EXCEL_EXTENSION);  
+    //  FileSaver.deferred.resolve(data);
+     
+
+    //  const url= window.URL.createObjectURL(data);
+    // window.open(url, "_blank");
   }
+  // downloadFile(data: any) {
+  //   // const blob = new Blob([data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+  //    const blob = new Blob([data], { type: 'application/vnd.ms-excel' });
+  //    if (window.navigator && window.navigator.msSaveBlob) {
+  //      console.log('1111');
+  //     window.navigator.msSaveBlob(blob);
+  // }
+  // else {
+  //     var objectUrl = URL.createObjectURL(blob);
+  //     console.log('2222', objectUrl);
+  //     window.open(objectUrl);
+  // }
+
+
+
+//    const url= window.URL.createObjectURL(blob);
+//    window.open(url);
+//  }
 }

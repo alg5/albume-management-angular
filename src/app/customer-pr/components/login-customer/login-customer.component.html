@@ -1,0 +1,16 @@
+<div class="container">
+    <h2> שלום, {{translations.CustomerName}} <span class="header-row">{{lastDate}} | {{lastTime}}&nbsp;:{{translations.LastVisit}}</span></h2>
+
+    <form [formGroup]="rForm" >
+        <div class="tbl-container">
+            <h1 class='login-caption'>כניסה</h1>
+            <div class="login-row">
+                <input class="login-input" onlyNumericInteger  matInput type="text" placeholder="תעודת זהות" #usernameobj appAutofocus formControlName="userid" 
+                maxlength="9" >
+                <div class="login-error" *ngIf="errorMessage" [innerHTML]="errorMessage"></div>
+            </div>
+            
+            <div class="login-row"><button (click)="sendLogin()" [disabled]="!rForm.valid">התחברות</button></div>
+        </div>
+    </form>
+</div>

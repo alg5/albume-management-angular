@@ -1,0 +1,26 @@
+
+<div  *ngIf="packages" #packages>
+    <div  class="row">רשימה חבילות</div>
+    <div class="tbl-container">
+        <!-- {{packages | json}} -->
+        <table class="table table-striped table-hover bs-table">
+            <thead>
+                <tr>
+                  <th scope="col">{{translations.ColPackageName}}</th>
+                  <th scope="col">{{translations.ColPackageAmount}}</th>
+                  <th scope="col">{{translations.ColPackageUsed}}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <ng-container  *ngFor="let package of packagesDst">
+                    <tr>
+                      <td>{{package.name}}</td>
+                      <td>{{package.amount | number}}</td>
+                      <td>{{package.used | number}}</td>
+                    </tr>
+                </ng-container>
+              </tbody>
+        </table>
+    </div>
+</div>
+
